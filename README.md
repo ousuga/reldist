@@ -1,2 +1,3 @@
 # reldist
-Este es un paquete con distribuciones útiles en confiabilidad
+Este es un paquete con distribuciones útiles en confiabilidad y sobrevivencia
+
