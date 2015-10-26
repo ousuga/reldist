@@ -59,5 +59,6 @@ plot(x=qEW(p,alpha=2,theta=1.5,lambda=0.5), y=p)
 
 ## Curve
 hist(rEW(10000,alpha=2,theta=1.5,lambda=0.5),freq=F,xlab="x", main="")
+curve(dEW(x,alpha=2,theta=1.5,lambda=0.5),  from=0, add=T)
 }
 

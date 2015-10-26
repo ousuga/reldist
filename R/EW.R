@@ -8,7 +8,6 @@
 #' random generation for the exponentiated weibull  distribution with
 #' parameters \code{alpha}, \code{theta} and \code{lambda}.
 #' 
-#' 
 #' @param x,q	vector of quantiles.
 #' @param p vector of probabilities.
 #' @param n number of observations. 
@@ -40,6 +39,7 @@
 #' 
 #' ## Curve
 #' hist(rEW(10000,alpha=2,theta=1.5,lambda=0.5),freq=F,xlab="x", main="")
+#' curve(dEW(x,alpha=2,theta=1.5,lambda=0.5),  from=0, add=T) 
 dEW<-function(x,alpha,theta,lambda, log = FALSE){
   if (any(x<0)) 
     stop(paste("x must be positive", "\n", ""))
