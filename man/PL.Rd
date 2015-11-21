@@ -3,6 +3,7 @@
 \name{PL}
 \alias{PL}
 \alias{dPL}
+\alias{hPL}
 \alias{pPL}
 \alias{qPL}
 \alias{rPL}
@@ -15,6 +16,8 @@ pPL(q, alpha, beta, lower.tail = TRUE, log.p = FALSE)
 qPL(p, alpha, beta, lower.tail = TRUE, log.p = FALSE)
 
 rPL(n, alpha, beta)
+
+hPL(x, alpha, beta)
 }
 \arguments{
 \item{x,q}{vector of quantiles.}
@@ -64,5 +67,8 @@ plot(x=qPL(p=p,alpha=0.8,beta=0.3), y=p)
 ## Curve
 hist(rPL(1000,alpha=2,beta=0.5),freq=F,xlab="x", main= "Histogram of rGEP")
 curve(dPL(x,alpha=2,beta=0.5),  from=0, add=T)
+
+##
+curve(hPL(x,alpha=0.2,beta=1), from=0, to=10, ylim=c(0,1.5), col="red",ylab="The hazard function")
 }
 

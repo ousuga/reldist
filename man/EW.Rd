@@ -3,6 +3,7 @@
 \name{EW}
 \alias{EW}
 \alias{dEW}
+\alias{hEW}
 \alias{pEW}
 \alias{qEW}
 \alias{rEW}
@@ -15,6 +16,8 @@ pEW(q, alpha, theta, lambda, lower.tail = TRUE, log.p = FALSE)
 qEW(p, alpha, theta, lambda, lower.tail = TRUE, log.p = FALSE)
 
 rEW(n, alpha, theta, lambda)
+
+hEW(x, alpha, theta, lambda)
 }
 \arguments{
 \item{x,q}{vector of quantiles.}
@@ -60,5 +63,8 @@ plot(x=qEW(p,alpha=2,theta=1.5,lambda=0.5), y=p)
 ## Curve
 hist(rEW(10000,alpha=2,theta=1.5,lambda=0.5),freq=F,xlab="x", main="")
 curve(dEW(x,alpha=2,theta=1.5,lambda=0.5),  from=0, add=T)
+
+##
+curve(hEW(x,alpha=2,theta=1.5,lambda=0.5), from=0, to=2, ylim=c(0,7), col="red",ylab="The hazard function")
 }
 

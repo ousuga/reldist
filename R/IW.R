@@ -45,6 +45,9 @@
 #' ## Curve
 #' hist(rIW(10000,alpha=5,theta=2.5),freq=F,xlab="x", main= "Histogram of rIW")
 #' curve(dIW(x,alpha=5,theta=2.5),  from=0, add=T)
+#' 
+#' ##
+#' curve(hIW(x,alpha=1,   theta=0.6), from=0, to=6, ylim=c(0,1), col="red",ylab="The hazard function")
 
 dIW<-function(x,alpha,theta, log = FALSE){
   if (any(x<0)) 
@@ -121,6 +124,19 @@ rIW <- function(n,alpha,theta){
   p <- runif(n)
   r <- qIW(p, alpha,theta)
   r
+}
+#' @export
+#' @rdname IW
+hIW<-function(x,alpha,theta){
+  if (any(x<0)) 
+    stop(paste("x must be positive", "\n", ""))
+  if (any(alpha <= 0 )) 
+    stop(paste("alpha must be positive", "\n", ""))
+  if (any(theta<=0)) 
+    stop(paste("theta must be positive", "\n", ""))
+  
+  h <- dIW(x,alpha,theta, log = FALSE)/pIW(q=x,alpha,theta, lower.tail=FALSE, log.p = FALSE)
+  h
 }
 
 

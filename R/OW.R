@@ -46,6 +46,10 @@
 #' ## Curve
 #' hist(rOW(10000,alpha=2,theta=3,lambda=0.2),freq=F,xlab="x", main= "Histogram of rOW")
 #' curve(dOW(x,alpha=2,theta=3,lambda=0.2),  from=0, add=T)
+#' 
+#' ##
+#' curve(hOW(x,alpha=5,theta=3,lambda=0.7), from=0, to=2.5, ylim=c(0,3), col="red",ylab="The hazard function")
+
 
 dOW<-function(x,alpha,theta,lambda, log = FALSE){
   if (any(x<0)) 
@@ -130,5 +134,20 @@ rOW <- function(n,alpha,theta,lambda){
   p <- runif(n)
   r <- qOW(p,alpha,theta,lambda)
   r
+}
+#' @export
+#' @rdname OW
+hOW<-function(x,alpha,theta,lambda){
+  if (any(x<0)) 
+    stop(paste("x must be positive", "\n", ""))
+  if (any(alpha<=0 )) 
+    stop(paste("alpha must be positive", "\n", ""))
+  if (any(theta<=0)) 
+    stop(paste("theta must be positive", "\n", ""))
+  if (any(lambda<=0)) 
+    stop(paste("lambda must be positive", "\n", ""))
+  
+  h <- dOW(x,alpha,theta,lambda, log = FALSE)/pOW(q=x,alpha,theta,lambda, lower.tail=FALSE, log.p = FALSE)
+  h
 }
 

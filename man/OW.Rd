@@ -3,6 +3,7 @@
 \name{OW}
 \alias{OW}
 \alias{dOW}
+\alias{hOW}
 \alias{pOW}
 \alias{qOW}
 \alias{rOW}
@@ -15,6 +16,8 @@ pOW(q, alpha, theta, lambda, lower.tail = TRUE, log.p = FALSE)
 qOW(p, alpha, theta, lambda, lower.tail = TRUE, log.p = FALSE)
 
 rOW(n, alpha, theta, lambda)
+
+hOW(x, alpha, theta, lambda)
 }
 \arguments{
 \item{x,q}{vector of quantiles.}
@@ -66,5 +69,8 @@ plot(x=qOW(p,alpha=2,theta=3,lambda=0.2), y=p)
 ## Curve
 hist(rOW(10000,alpha=2,theta=3,lambda=0.2),freq=F,xlab="x", main= "Histogram of rOW")
 curve(dOW(x,alpha=2,theta=3,lambda=0.2),  from=0, add=T)
+
+##
+curve(hOW(x,alpha=5,theta=3,lambda=0.7), from=0, to=2.5, ylim=c(0,3), col="red",ylab="The hazard function")
 }
 

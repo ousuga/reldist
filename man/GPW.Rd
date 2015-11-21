@@ -3,6 +3,7 @@
 \name{GPW}
 \alias{GPW}
 \alias{dGPW}
+\alias{hGPW}
 \alias{pGPW}
 \alias{qGPW}
 \alias{rGPW}
@@ -15,6 +16,8 @@ pGPW(q, alpha, theta, lambda, lower.tail = TRUE, log.p = FALSE)
 qGPW(p, alpha, theta, lambda, lower.tail = TRUE, log.p = FALSE)
 
 rGPW(n, alpha, theta, lambda)
+
+hGPW(x, alpha, theta, lambda)
 }
 \arguments{
 \item{x,q}{vector of quantiles.}
@@ -66,5 +69,8 @@ plot(x=qGPW(p,alpha=0.5,theta=0.5,lambda=0.25), y=p)
 ## Curve
 hist(rGPW(10000,alpha=0.5,theta=0.5,lambda=0.25),freq=F,xlab="x", main= "Histogram of rGEP")
 curve(dGPW(x,alpha=0.5,theta=0.5,lambda=0.25),  from=0, add=T)
+
+##
+curve(hGPW(x,alpha=1,theta=2,lambda=1.25), from=0, to=3.2, ylim=c(0,6), col="red",ylab="The hazard function")
 }
 

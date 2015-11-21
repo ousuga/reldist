@@ -3,6 +3,7 @@
 \name{MW}
 \alias{MW}
 \alias{dMW}
+\alias{hMW}
 \alias{pMW}
 \alias{qMW}
 \alias{rMW}
@@ -15,6 +16,8 @@ pMW(q, beta, gamma, lambda, lower.tail = TRUE, log.p = FALSE)
 qMW(p, beta, gamma, lambda, lower.tail = TRUE, log.p = FALSE)
 
 rMW(n, beta, gamma, lambda)
+
+hMW(x, beta, gamma, lambda)
 }
 \arguments{
 \item{x,q}{vector of quantiles.}
@@ -66,5 +69,8 @@ plot(x=qMW(p=p,beta=2,gamma=1.5,lambda=0.2), y=p)
 ## Curve
 hist(rMW(1000,beta=2,gamma=1.5,lambda=0.2),freq=F,xlab="x", main= "Histogram of rMW")
 curve(dMW(x,beta=2,gamma=1.5,lambda=0.2),  from=0, add=T)
+
+##
+curve(hMW(x,beta=2,gamma=1.5,lambda=0.2), from=0, to=1.5, ylim=c(0,5), col="red",ylab="Density")
 }
 

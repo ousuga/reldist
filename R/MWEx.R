@@ -46,6 +46,10 @@
 #' ## Curve
 #' hist(rMWEx(10000,alpha=1/0.7,beta=2,lambda=0.2),freq=F,xlab="x", main= "Histogram of rGEP")
 #' curve(dMWEx(x,alpha=1/0.7,beta=2,lambda=0.2),  from=0, add=T)
+#' 
+#' ##
+#' curve(hMWEx(x,alpha=2,beta=0.7,lambda=2), from=0, to=1.7, ylim=c(0,12), col="red",ylab="The hazard function")
+
 
 dMWEx<-function(x,alpha,beta,lambda, log = FALSE){
   if (any(x<0)) 
@@ -134,3 +138,18 @@ rMWEx <- function(n,alpha,beta,lambda){
   r
 }
 
+#' @export
+#' @rdname MWEx
+hMWEx<-function(x,alpha,beta,lambda){
+  if (any(x<0)) 
+    stop(paste("x must be positive", "\n", ""))
+  if (any(alpha<=0 )) 
+    stop(paste("alpha must be positive", "\n", ""))
+  if (any(beta<=0)) 
+    stop(paste("beta must be positive", "\n", ""))
+  if (any(lambda<=0)) 
+    stop(paste("lambda must be positive", "\n", ""))
+  
+  h <- dMWEx(x,alpha,beta,lambda, log = FALSE)/pMWEx(q=x,alpha,beta,lambda, lower.tail=FALSE, log.p = FALSE)
+  h
+}

@@ -45,6 +45,10 @@
 #' ## Curve
 #' hist(rPL(1000,alpha=2,beta=0.5),freq=F,xlab="x", main= "Histogram of rGEP")
 #' curve(dPL(x,alpha=2,beta=0.5),  from=0, add=T)
+#' 
+#' ##
+#' curve(hPL(x,alpha=0.2,beta=1), from=0, to=10, ylim=c(0,1.5), col="red",ylab="The hazard function")
+
 
 dPL<-function(x,alpha,beta, log = FALSE){
   if (any(x<0)) 
@@ -130,4 +134,18 @@ rPL <- function(n,alpha,beta){
   p <- runif(n)
   r <- qPL(p, alpha,beta)
   r
+}
+
+#' @export
+#' @rdname PL
+hPL<-function(x,alpha,beta){
+  if (any(x<0)) 
+    stop(paste("x must be positive", "\n", ""))
+  if (any(alpha<=0 )) 
+    stop(paste("alpha must be positive", "\n", ""))
+  if (any(beta<=0)) 
+    stop(paste("beta must be positive", "\n", ""))  
+  
+  h <- dPL(x,alpha,beta, log = FALSE)/pPL(q=x,alpha,beta, lower.tail=FALSE, log.p = FALSE)
+  h  
 }

@@ -45,6 +45,10 @@
 #' ## Curve
 #' hist(rLW(10000,a=0,b=3),freq=F,xlab="x", main= "")
 #' curve(dLW(x,a=0,b=3),  from=-20, to=10, add=T) 
+#' 
+#' ##
+#' curve(hLW(x,a=0,b=1), from=-20, to=0, ylim=c(0,0.3), col="red",ylab="The hazard function")
+#' 
 dLW<-function(x,a,b, log = FALSE){
 if (any(b<=0)) 
   stop(paste("lambda must be positive", "\n", ""))
@@ -106,4 +110,12 @@ rLW <- function(n,a,b){
   r <- qLW(p,a,b)
   r
 }
+#' @export
+#' @rdname LW
+hLW<-function(x,a,b){
+if (any(b<=0)) 
+  stop(paste("lambda must be positive", "\n", ""))
 
+h <- dLW(x,a,b, log = FALSE)/pLW(q=x,a,b, lower.tail=FALSE, log.p = FALSE)
+h
+}

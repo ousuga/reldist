@@ -3,6 +3,7 @@
 \name{MWEx}
 \alias{MWEx}
 \alias{dMWEx}
+\alias{hMWEx}
 \alias{pMWEx}
 \alias{qMWEx}
 \alias{rMWEx}
@@ -15,6 +16,8 @@ pMWEx(q, alpha, beta, lambda, lower.tail = TRUE, log.p = FALSE)
 qMWEx(p, alpha, beta, lambda, lower.tail = TRUE, log.p = FALSE)
 
 rMWEx(n, alpha, beta, lambda)
+
+hMWEx(x, alpha, beta, lambda)
 }
 \arguments{
 \item{x,q}{vector of quantiles.}
@@ -66,5 +69,8 @@ plot(x=qMWEx(p,alpha=1/0.7,beta=2,lambda=0.2), y=p)
 ## Curve
 hist(rMWEx(10000,alpha=1/0.7,beta=2,lambda=0.2),freq=F,xlab="x", main= "Histogram of rGEP")
 curve(dMWEx(x,alpha=1/0.7,beta=2,lambda=0.2),  from=0, add=T)
+
+##
+curve(hMWEx(x,alpha=2,beta=0.7,lambda=2), from=0, to=1.7, ylim=c(0,12), col="red",ylab="The hazard function")
 }
 

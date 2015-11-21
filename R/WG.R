@@ -47,6 +47,10 @@
 #' ## Curve
 #' hist(rWG(1000,alpha=1.5,beta=0.2, pi=0.95),freq=F,xlab="x", main= "Histogram of rWG")
 #' curve(dWG(x,alpha=1.5,beta=0.2, pi=0.95),  from=0, add=T)
+#' 
+#' ##
+#' curve(hWG(x,alpha=2,beta=0.25, pi=0.15), from=0, to=15, ylim=c(0,2.2), col="red",ylab="The hazard function")
+
 
 dWG<-function(x,alpha,beta,pi, log = FALSE){
   if (any(x<0)) 
@@ -141,4 +145,18 @@ rWG <- function(n,alpha,beta,pi){
   r <- qWG(p, alpha,beta,pi)
   r
 }
-
+#' @export
+#' @rdname WG
+hWG<-function(x,alpha,beta,pi){
+  if (any(x<0)) 
+    stop(paste("x must be positive", "\n", ""))
+  if (any(alpha<=0 )) 
+    stop(paste("alpha must be positive", "\n", ""))
+  if (any(beta<=0)) 
+    stop(paste("beta must be positive", "\n", ""))  
+  if (any(pi <=0  | pi>=1  )) 
+    stop(paste("pi must be between zero and one", "\n", ""))
+  
+  h <- dWG(x,alpha,beta,pi, log = FALSE)/pWG(q=x,alpha,beta,pi, lower.tail=FALSE, log.p = FALSE)
+  h  
+}

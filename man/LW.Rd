@@ -3,6 +3,7 @@
 \name{LW}
 \alias{LW}
 \alias{dLW}
+\alias{hLW}
 \alias{pLW}
 \alias{qLW}
 \alias{rLW}
@@ -15,6 +16,8 @@ pLW(q, a, b, lower.tail = TRUE, log.p = FALSE)
 qLW(p, a, b, lower.tail = TRUE, log.p = FALSE)
 
 rLW(n, a, b)
+
+hLW(x, a, b)
 }
 \arguments{
 \item{x,q}{vector of quantiles.}
@@ -64,5 +67,8 @@ plot(x=qLW(p,a=0,b=3), y=p)
 ## Curve
 hist(rLW(10000,a=0,b=3),freq=F,xlab="x", main= "")
 curve(dLW(x,a=0,b=3),  from=-20, to=10, add=T)
+
+##
+curve(hLW(x,a=0,b=1), from=-20, to=0, ylim=c(0,0.3), col="red",ylab="The hazard function")
 }
 

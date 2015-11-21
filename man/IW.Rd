@@ -3,6 +3,7 @@
 \name{IW}
 \alias{IW}
 \alias{dIW}
+\alias{hIW}
 \alias{pIW}
 \alias{qIW}
 \alias{rIW}
@@ -15,6 +16,8 @@ pIW(q, alpha, theta, lower.tail = TRUE, log.p = FALSE)
 qIW(p, alpha, theta, lower.tail = TRUE, log.p = FALSE)
 
 rIW(n, alpha, theta)
+
+hIW(x, alpha, theta)
 }
 \arguments{
 \item{x,q}{vector of quantiles.}
@@ -64,5 +67,8 @@ plot(x=qIW(p,alpha=5,theta=2.5), y=p)
 ## Curve
 hist(rIW(10000,alpha=5,theta=2.5),freq=F,xlab="x", main= "Histogram of rIW")
 curve(dIW(x,alpha=5,theta=2.5),  from=0, add=T)
+
+##
+curve(hIW(x,alpha=1,   theta=0.6), from=0, to=6, ylim=c(0,1), col="red",ylab="The hazard function")
 }
 

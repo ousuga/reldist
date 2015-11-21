@@ -3,6 +3,7 @@
 \name{WG}
 \alias{WG}
 \alias{dWG}
+\alias{hWG}
 \alias{pWG}
 \alias{qWG}
 \alias{rWG}
@@ -15,6 +16,8 @@ pWG(q, alpha, beta, pi, lower.tail = TRUE, log.p = FALSE)
 qWG(p, alpha, beta, pi, lower.tail = TRUE, log.p = FALSE)
 
 rWG(n, alpha, beta, pi)
+
+hWG(x, alpha, beta, pi)
 }
 \arguments{
 \item{x,q}{vector of quantiles.}
@@ -66,5 +69,8 @@ plot(x=qWG(p=p,alpha=0.5,beta=0.2, pi=0.95), y=p)
 ## Curve
 hist(rWG(1000,alpha=1.5,beta=0.2, pi=0.95),freq=F,xlab="x", main= "Histogram of rWG")
 curve(dWG(x,alpha=1.5,beta=0.2, pi=0.95),  from=0, add=T)
+
+##
+curve(hWG(x,alpha=2,beta=0.25, pi=0.15), from=0, to=15, ylim=c(0,2.2), col="red",ylab="The hazard function")
 }
 

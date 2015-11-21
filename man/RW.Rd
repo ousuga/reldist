@@ -3,6 +3,7 @@
 \name{RW}
 \alias{RW}
 \alias{dRW}
+\alias{hRW}
 \alias{pRW}
 \alias{qRW}
 \alias{rRW}
@@ -15,6 +16,8 @@ pRW(q, alpha, theta, lower.tail = TRUE, log.p = FALSE)
 qRW(p, alpha, theta, lower.tail = TRUE, log.p = FALSE)
 
 rRW(n, alpha, theta)
+
+hRW(x, alpha, theta)
 }
 \arguments{
 \item{x,q}{vector of quantiles.}
@@ -64,5 +67,8 @@ plot(x=qRW(p=p,alpha=0.5,theta=2), y=p)
 ## Curve
 hist(rRW(10000,alpha=0.5,theta=2), freq=F,xlab="x", main= "Histogram of rRW")
 curve(dRW(x,alpha=0.5,theta=2),  from=-5, to=0, add=T)
+
+##
+curve(hRW(x,alpha=1,theta=1), from=-5, to=0, ylim=c(0,1), col="red",ylab="The hazard function")
 }
 

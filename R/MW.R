@@ -46,6 +46,10 @@
 #' ## Curve
 #' hist(rMW(1000,beta=2,gamma=1.5,lambda=0.2),freq=F,xlab="x", main= "Histogram of rMW")
 #' curve(dMW(x,beta=2,gamma=1.5,lambda=0.2),  from=0, add=T)
+#' 
+#' ##
+#' curve(hMW(x,beta=2,gamma=1.5,lambda=0.2), from=0, to=1.5, ylim=c(0,5), col="red",ylab="Density")
+
 
 dMW<-function(x,beta,gamma,lambda, log = FALSE){
   if (any(x<0)) 
@@ -140,3 +144,18 @@ rMW <- function(n, beta,gamma,lambda){
   r
 }
 
+#' @export
+#' @rdname MW
+hMW<-function(x,beta,gamma,lambda){
+  if (any(x<0)) 
+    stop(paste("x must be positive", "\n", ""))
+  if (any(beta<=0 )) 
+    stop(paste("beta must be positive", "\n", ""))
+  if (any(gamma<0)) 
+    stop(paste("gamma must be positive", "\n", ""))
+  if (any(lambda<0)) 
+    stop(paste("lambda must be positive", "\n", ""))
+  
+  h <- dMW(x,beta,gamma,lambda, log = FALSE)/pMW(q=x,beta,gamma,lambda, lower.tail=FALSE, log.p = FALSE)
+  h  
+}

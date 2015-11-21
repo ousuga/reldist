@@ -45,6 +45,10 @@
 #' ## Curve
 #' hist(rRW(10000,alpha=0.5,theta=2), freq=F,xlab="x", main= "Histogram of rRW")
 #' curve(dRW(x,alpha=0.5,theta=2),  from=-5, to=0, add=T)
+#' 
+#' ##
+#' curve(hRW(x,alpha=1,theta=1), from=-5, to=0, ylim=c(0,1), col="red",ylab="The hazard function")
+
 
 dRW<-function(x,alpha,theta, log=FALSE){
   if (any(x>0)) 
@@ -121,4 +125,16 @@ rRW <- function(n,alpha,theta){
   r <- qRW(p,alpha,theta)
   r
 }
-
+#' @export
+#' @rdname RW
+hRW<-function(x,alpha,theta){
+  if (any(x>0)) 
+    stop(paste("x must be negative", "\n", ""))
+  if (any(alpha <= 0 )) 
+    stop(paste("alpha must be positive", "\n", ""))
+  if (any(theta<=0)) 
+    stop(paste("theta must be positive", "\n", ""))
+  
+  h <- dRW(x,alpha,theta, log = FALSE)/pRW(q=x,alpha,theta, lower.tail=FALSE, log.p = FALSE)
+  h
+}

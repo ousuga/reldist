@@ -46,6 +46,10 @@
 #' ## Curve
 #' hist(rGPW(10000,alpha=0.5,theta=0.5,lambda=0.25),freq=F,xlab="x", main= "Histogram of rGEP")
 #' curve(dGPW(x,alpha=0.5,theta=0.5,lambda=0.25),  from=0, add=T)
+#' 
+#' ##
+#' curve(hGPW(x,alpha=1,theta=2,lambda=1.25), from=0, to=3.2, ylim=c(0,6), col="red",ylab="The hazard function")
+
 
 dGPW<-function(x,alpha,theta,lambda,log = FALSE){
   if (any(x<0)) 
@@ -132,3 +136,19 @@ rGPW <- function(n,alpha,theta,lambda){
   r
 }
 
+#' @export
+#' @rdname GPW
+# Hazard function
+hGPW<-function(x,alpha,theta,lambda){
+  if (any(x<0)) 
+    stop(paste("x must be positive", "\n", ""))
+  if (any(alpha <= 0 )) 
+    stop(paste("alpha must be positive", "\n", ""))
+  if (any(theta<=0)) 
+    stop(paste("theta must be positive", "\n", ""))
+  if (any(lambda<=0)) 
+    stop(paste("lambda must be positive", "\n", ""))
+  
+  h <- dGPW(x,alpha,theta,lambda, log = FALSE)/pGPW(q=x,alpha,theta,lambda, lower.tail=FALSE, log.p = FALSE)
+  h
+}

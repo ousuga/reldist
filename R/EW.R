@@ -40,6 +40,11 @@
 #' ## Curve
 #' hist(rEW(10000,alpha=2,theta=1.5,lambda=0.5),freq=F,xlab="x", main="")
 #' curve(dEW(x,alpha=2,theta=1.5,lambda=0.5),  from=0, add=T) 
+#' 
+#' ##
+#' curve(hEW(x,alpha=2,theta=1.5,lambda=0.5), from=0, to=2, ylim=c(0,7), col="red",ylab="The hazard function")
+#' 
+
 dEW<-function(x,alpha,theta,lambda, log = FALSE){
   if (any(x<0)) 
     stop(paste("x must be positive", "\n", ""))
@@ -121,5 +126,20 @@ rEW <- function(n,alpha,theta, lambda){
   p <- runif(n)
   r <- qEW(p, alpha,theta,lambda)
   r
+}
+#' @export
+#' @rdname EW
+hEW<-function(x,alpha,theta, lambda){
+  if (any(x<0)) 
+    stop(paste("x must be positive", "\n", ""))
+  if (any(alpha<=0 )) 
+    stop(paste("alpha must be positive", "\n", ""))
+  if (any(theta<=0)) 
+    stop(paste("theta must be positive", "\n", ""))
+  if (any(lambda<=0)) 
+    stop(paste("lambda must be positive", "\n", ""))
+  
+  h <- dEW(x,alpha,theta, lambda, log = FALSE)/pEW(q=x,alpha,theta, lambda, lower.tail=FALSE, log.p = FALSE)
+  h
 }
 
