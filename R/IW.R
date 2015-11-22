@@ -33,7 +33,7 @@
 #' @export
 #' @examples  
 #' ## The probability density function 
-#' curve(dIW(x,alpha=5,   theta=2.5), from=0, to=10, ylim=c(0,0.55), col="red", las=1, ylab="The probability density function")
+#' curve(dIW(x,alpha=5,   theta = 2.5), from=0, to=10, ylim=c(0,0.55), col="red", las=1, ylab="The probability density function")
 #' 
 #' ## The cumulative distribution and the Reliability function
 #' par(mfrow=c(1,2))
