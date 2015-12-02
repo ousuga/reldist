@@ -4,7 +4,7 @@
 #' The Exponentiated Weibull Distribution
 #' 
 #' @description 
-#' Density, distribution function, quantile function and
+#' Density, distribution function, quantile function, hazard function and
 #' random generation for the exponentiated weibull  distribution with
 #' parameters \code{alpha}, \code{theta} and \code{lambda}.
 #' 
