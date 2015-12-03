@@ -27,27 +27,27 @@
 #' 
 #' @return 
 #' \code{dPL} gives the density, \code{pPL} gives the distribution 
-#' function, \code{qPL} gives the quantile function, and \code{rPL}
-#' generates random deviates.
+#' function, \code{qPL} gives the quantile function, \code{rPL}
+#' generates random deviatesand and \code{hPL} gives the hazard function.
 #' 
 #' @export
 #' @examples  
-#' ## Curve 
-#' curve(dPL(x,1,0.5), from=0, to=15, ylim=c(0,0.6), col="red",ylab="Density")
+#' ## The probability density function 
+#' curve(dPL(x,1,0.5), from=0, to=15, ylim=c(0,0.6), col="red", las=1, ylab="The probability density function")
 #' 
-#' ## Curve
-#' curve(pPL(x,alpha=1,beta=0.5), from=0, to=15,  ylim=c(0,1), col="blue")
+#' ## The cumulative distribution and the Reliability function
+#' curve(pPL(x,alpha=1,beta=0.5), from=0, to=15,  ylim=c(0,1), col="red", las=1, ylab="The Reliability function")
 #' 
-#' ## Curve
+#' ## The quantile function
 #' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qPL(p=p,alpha=0.8,beta=0.3), y=p)
+#' plot(x=qPL(p=p,alpha=0.8,beta=0.3), y=p, xlab="Quantile", las=1, ylab="Probability")
 #' 
-#' ## Curve
-#' hist(rPL(1000,alpha=2,beta=0.5),freq=F,xlab="x", main= "Histogram of rGEP")
-#' curve(dPL(x,alpha=2,beta=0.5),  from=0, add=T)
+#' ## The random function
+#' hist(rPL(1000,alpha=2,beta=0.5),freq=F,xlab="x", las=1, main="")
+#' curve(dPL(x,alpha=2,beta=0.5),  from=0, add=T, col="red")
 #' 
-#' ##
-#' curve(hPL(x,alpha=0.2,beta=1), from=0, to=10, ylim=c(0,1.5), col="red",ylab="The hazard function")
+#' ## The Hazard function
+#' curve(hPL(x,alpha=0.2,beta=1), from=0, to=10, ylim=c(0,1.5), col="red", las=1, ylab="The Hazard function")
 
 
 dPL<-function(x,alpha,beta, log = FALSE){
