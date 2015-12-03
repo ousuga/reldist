@@ -49,7 +49,7 @@
 #' hist(rIW(1000,alpha=5,theta=2.5),freq=F,xlab="x", las=1, main="")
 #' curve(dIW(x,alpha=5,theta=2.5),  from=0, add=T, col="red")
 #' 
-#' ## Tha Hazard function
+#' ## The Hazard function
 #' curve(hIW(x,alpha=5,   theta=2.5), from=0, to=15, ylim=c(0,1), col="red", las=1, ylab="The Hazard function")
 
 dIW<-function(x,alpha,theta, log = FALSE){
