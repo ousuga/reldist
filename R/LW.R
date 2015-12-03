@@ -27,27 +27,27 @@
 #' 
 #' @return 
 #' \code{dLW} gives the density, \code{pLW} gives the distribution 
-#' function, \code{qLW} gives the quantile function, and \code{rLW}
-#' generates random deviates.
+#' function, \code{qLW} gives the quantile function, \code{rLW}
+#' generates random deviatesand and \code{hLW} gives the hazard function.
 #' 
 #' @export
 #' @examples  
-#' ## Curve 
-#' curve(dLW(x,a = 0,b = 1), from = -20, to = 10, ylim=c(0,0.4), col="red", ylab="Density") 
+#' ## The probability density function 
+#' curve(dLW(x,a = 0,b = 1), from = -20, to = 10, ylim=c(0,0.4), col="red", las=1, ylab="The probability density function")
 #' 
-#' ## Curve
-#' curve(pLW(x,a=0,b=1), from=0, to=10, col="red")
+#' ## The cumulative distribution and the Reliability function
+#' curve(pLW(x,a=0,b=1), from=0, to=10, col="red", las=1, ylab="The Reliability function")
 #' 
-#' ## Curve
+#' ## The quantile function
 #' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qLW(p,a=0,b=3), y=p)
+#' plot(x=qLW(p,a=0,b=3), y=p, xlab="Quantile", las=1, ylab="Probability")
 #' 
-#' ## Curve
-#' hist(rLW(10000,a=0,b=3),freq=F,xlab="x", main= "")
+#' ## The random function
+#' hist(rLW(10000,a=0,b=3),freq=F,xlab="x", las=1, main="")
 #' curve(dLW(x,a=0,b=3),  from=-20, to=10, add=T) 
 #' 
-#' ##
-#' curve(hLW(x,a=0,b=1), from=-20, to=0, ylim=c(0,0.3), col="red",ylab="The hazard function")
+#' ## The Hazard function
+#' curve(hLW(x,a=0,b=1), from=-20, to=0, ylim=c(0,0.3), col="red",ylab="The hazard function", las=1)
 #' 
 dLW<-function(x,a,b, log = FALSE){
 if (any(b<=0)) 
