@@ -29,27 +29,27 @@
 #' 
 #' @return 
 #' \code{dWG} gives the density, \code{pWG} gives the distribution 
-#' function, \code{qWG} gives the quantile function, and \code{rWG}
-#' generates random deviates.
+#' function, \code{qWG} gives the quantile function, \code{rWG}
+#' generates random deviatesand and \code{hWG} gives the hazard function.
 #' 
 #' @export
 #' @examples  
-#' ## Curve 
-#' curve(dWG(x,0.5,0.2, 0.95), from=0, to=5, ylim=c(0,1.5), col="red",ylab="Density")
+#' ## The probability density function 
+#' curve(dWG(x,0.5,0.2, 0.95), from=0, to=5, ylim=c(0,1.5), col="red", las=1, ylab="The probability density function")
 #' 
-#' ## Curve
-#' curve(pWG(x,0.5,0.2, 0.95), from=0, to=5, col="blue")
+#' ## The cumulative distribution and the Reliability function
+#' curve(pWG(x,0.5,0.2, 0.95), from=0, to=5, col="red", las=1, ylab="The Reliability function")
 #' 
-#' ## Curve
+#' ## The quantile function
 #' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qWG(p=p,alpha=0.5,beta=0.2, pi=0.95), y=p)
+#' plot(x=qWG(p=p,alpha=0.5,beta=0.2, pi=0.95), y=p, xlab="Quantile", las=1, ylab="Probability")
 #' 
-#' ## Curve
-#' hist(rWG(1000,alpha=1.5,beta=0.2, pi=0.95),freq=F,xlab="x", main= "Histogram of rWG")
+#' ## The random function
+#' hist(rWG(1000,alpha=1.5,beta=0.2, pi=0.95),freq=F,xlab="x", las=1, main="")
 #' curve(dWG(x,alpha=1.5,beta=0.2, pi=0.95),  from=0, add=T)
 #' 
-#' ##
-#' curve(hWG(x,alpha=2,beta=0.25, pi=0.15), from=0, to=15, ylim=c(0,2.2), col="red",ylab="The hazard function")
+#' ## The Hazard function
+#' curve(hWG(x,alpha=2,beta=0.25, pi=0.15), from=0, to=15, ylim=c(0,2.2), col="red",ylab="The hazard function", las=1)
 
 
 dWG<-function(x,alpha,beta,pi, log = FALSE){
