@@ -11,8 +11,8 @@
 #' @param x,q	vector of quantiles.
 #' @param p vector of probabilities.
 #' @param n number of observations. 
-#' @param alpha         ##############BUSCAR############
-#' @param theta         ##############BUSCAR############   
+#' @param alpha parameter one.
+#' @param theta parameter two.   
 #' @param log,log.p	logical; if TRUE, probabilities p are given as log(p).	
 #' @param lower.tail logical; if TRUE (default), probabilities are 
 #' P[X <= x], otherwise, P[X > x].
@@ -27,27 +27,27 @@
 #' 
 #' @return 
 #' \code{dRW} gives the density, \code{pRW} gives the distribution 
-#' function, \code{qRW} gives the quantile function, and \code{rRW}
-#' generates random deviates.
+#' function, \code{qRW} gives the quantile function, \code{rRW}
+#' generates random deviatesand and \code{hRW} gives the hazard function.
 #' 
 #' @export
 #' @examples  
-#' ## Curve 
-#' curve(dRW(x,1,1), from=-5, to=0, ylim=c(0,1), col="red",ylab="Density")
+#' ## The probability density function
+#' curve(dRW(x,1,1), from=-5, to=0, ylim=c(0,1), col="red", las=1, ylab="The probability density function")
 #' 
-#' ## Curve
-#' curve(pRW(x,alpha=1,theta=1), from=-5, to=0, ylim=c(0,1), col="blue",ylab="Density")
+#' ## The cumulative distribution and the Reliability function
+#' curve(pRW(x,alpha=1,theta=1), from=-5, to=0, ylim=c(0,1), col="red", las=1, ylab="The Reliability function")
 #' 
-#' ## Curve
+#' ## The quantile function
 #' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qRW(p=p,alpha=0.5,theta=2), y=p)
+#' plot(x=qRW(p=p,alpha=0.5,theta=2), y=p, xlab="Quantile", las=1, ylab="Probability")
 #' 
-#' ## Curve
-#' hist(rRW(10000,alpha=0.5,theta=2), freq=F,xlab="x", main= "Histogram of rRW")
+#' ## The random function
+#' hist(rRW(10000,alpha=0.5,theta=2), freq=F,xlab="x", las=1, main="")
 #' curve(dRW(x,alpha=0.5,theta=2),  from=-5, to=0, add=T)
 #' 
-#' ##
-#' curve(hRW(x,alpha=1,theta=1), from=-5, to=0, ylim=c(0,1), col="red",ylab="The hazard function")
+#' ## The Hazard function
+#' curve(hRW(x,alpha=1,theta=1), from=-5, to=0, ylim=c(0,1), col="red",ylab="The hazard function", las=1)
 
 
 dRW<-function(x,alpha,theta, log=FALSE){
