@@ -113,7 +113,6 @@ qEW <- function(p,alpha,theta,lambda, lower.tail = TRUE, log.p = FALSE){
   q <- ((-1/alpha)*log(1-p^(1/lambda)))^(1/theta)
   q
 }
-
 #' @export
 #' @rdname EW
 rEW <- function(n,alpha,theta, lambda){
