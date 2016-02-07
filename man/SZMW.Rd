@@ -51,7 +51,7 @@ parameters \code{alpha}, \code{beta} and \code{gamma}.
 The Sarhan and Zaindins modified weibull with parameters \code{alpha},
 \code{beta} and \code{gamma} has density given by
 
-f(x)=(alpha+beta*x*gamma*x^(gamma-1))*exp(-alpha*x-beta*x^gamma)
+f(x)=(alpha+beta*gamma*x^(gamma-1))*exp(-alpha*x-beta*x^gamma)
 
 for x>0.
 }

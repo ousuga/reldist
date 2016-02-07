@@ -49,7 +49,7 @@ parameters \code{alpha} and \code{beta}.
 The power Lindley distribution with parameters \code{alpha} and
 \code{beta} has density given by
 
-f(x) = (((alpha*beta)^2)/(beta+1))*(1+x^(alpha))*x^(alpha-1)*exp(-beta*(x^alpha))
+f(x) = ((alpha*beta^2)/(beta+1))*(1+x^(alpha))*x^(alpha-1)*exp(-beta*(x^alpha))
 
 for x > 0.
 }

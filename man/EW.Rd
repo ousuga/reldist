@@ -51,6 +51,8 @@ The Exponentiated Weibull Distribution with parameters \code{alpha},
 
 f(x)=lambda*alpha*theta*x^(theta-1)*exp(-alpha*(x^theta))*(1-exp(-alpha*(x^theta)))^(lambda-1)
 
+for x > 0.
+
 #'
 }
 \examples{
