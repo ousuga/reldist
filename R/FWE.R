@@ -18,7 +18,7 @@
 #' P[X <= x], otherwise, P[X > x].
 #' 
 #' @details 
-#' The flexible weibull extension with parameters \code{alpha} and \code{lambda}
+#' The flexible weibull extension with parameters \code{alpha} and \code{beta}
 #' has density given by
 #' 
 #' f(x) = (alpha + (beta/x^2))*exp(alpha*x - beta/x)*exp(-exp(alpha*x-beta/x))
@@ -28,26 +28,29 @@
 #' @return 
 #' \code{dFWE} gives the density, \code{pFWE} gives the distribution 
 #' function, \code{qFWE} gives the quantile function, \code{rFWE}
-#' generates random deviatesand and \code{hFWE} gives the hazard function.
+#' generates random deviates and \code{hFWE} gives the hazard function.
 #' 
 #' @export
 #' @examples  
 #' ## The probability density function
-#' curve(dFWE(x,alpha = 0.75, beta = 0.5), from=0, to=3, ylim=c(0,1.7), col="red", las=1, ylab="The probability density function")
+#' curve(dFWE(x, alpha = 0.75, beta = 0.5), from = 0, to = 3, ylim = c(0, 1.7), col = "red", las = 1, ylab = "The probability density function")
 #' 
 #' ## The cumulative distribution and the Reliability function
-#' curve(pFWE(x,alpha= 0.75, beta =0.5), from=0, to=3, col="red", las=1, ylab="The Reliability function")
+#' par(mfrow = c(1, 2))
+#' curve(pFWE(x, alpha = 0.75, beta = 0.5), from = 0, to = 3, col = "red", las = 1, ylab = "The cumulative distribution function")
+#' curve(pFWE(x, alpha = 0.75, beta = 0.5, lower.tail = FALSE), from = 0, to = 3, col = "red", las = 1, ylab = "The Reliability function")
 #' 
 #' ## The quantile function
-#' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qFWE(p=p,alpha=0.75,beta=0.5), y=p, xlab="Quantile", las=1, ylab="Probability"))
-#' 
+#' p <- seq(from = 0, to = 0.99999, length.out = 100)
+#' plot(x = qFWE(p,alpha = 0.75, beta = 0.5), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+#' curve(pFWE(x, alpha = 0.75, beta = 0.5), from = 0, add = TRUE, col = "red")
+#'  
 #' ## The random function
-#' hist(rFWE(1000,alpha=2,beta=0.5),freq=F,xlab="x", main= "", las=1)
-#' curve(dFWE(x,alpha=2,beta=0.5),  from=0, add=T)
+#' hist(rFWE(n = 1000, alpha = 2, beta = 0.5), freq = FALSE, xlab = "x", ylim = c(0, 2), las = 1, main = "")
+#' curve(dFWE(x, alpha = 2, beta = 0.5),  from = 0, to = 3, add = TRUE, , col = "red")
 #' 
 #' ## The Hazard function
-#' curve(hFWE(x,alpha=0.75,   beta=0.5), from=0, to=2, ylim=c(0,2.5), col="red",ylab="The hazard function", las=1)
+#' curve(hFWE(x, alpha = 0.75, beta = 0.5), from = 0, to = 2, ylim = c(0, 2.5), col = "red", ylab = "The Hazard function", las = 1)
 #' 
 dFWE<-function(x,alpha,beta,log = FALSE){
   if (any(x<0)) 

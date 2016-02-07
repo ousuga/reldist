@@ -4,16 +4,16 @@
 #' The Generalized Power Weibull Distribution
 #' 
 #' @description 
-#' Density, distribution function, quantile function and
-#' random generation for the generalized power weibull distribution with
+#' Density, distribution function, quantile function , 
+#' random generation and hazard function for the generalized power weibull distribution with
 #' parameters \code{alpha}, \code{theta} and \code{lambda}.
 #' 
 #' @param x,q	vector of quantiles.
 #' @param p vector of probabilities.
 #' @param n number of observations. 
-#' @param alpha parameter.    
-#' @param theta parameter.
-#' @param lambda parameter.        
+#' @param alpha parameter one.    
+#' @param theta parameter two.
+#' @param lambda parameter three.        
 #' @param log,log.p	logical; if TRUE, probabilities p are given as log(p).	
 #' @param lower.tail logical; if TRUE (default), probabilities are 
 #' P[X <= x], otherwise, P[X > x].
@@ -29,27 +29,29 @@
 #' @return 
 #' \code{dGPW} gives the density, \code{pGPW} gives the distribution 
 #' function, \code{qGPW} gives the quantile function, \code{rGPW}
-#' generates random deviatesand and \code{hGPW} gives the hazard function.
+#' generates random deviates and \code{hGPW} gives the hazard function.
 #' 
 #' @export
 #' @examples  
 #' ## The probability density function 
-#' curve(dGPW(x,0.5,0.5,0.25), from=0, to=2.5, ylim=c(0,3), col="red", las=1, ylab="The probability density function")
+#' curve(dGPW(x, alpha = 0.5, theta = 0.5, lambda = 0.25), from = 0, to = 2.5, ylim = c(0, 3), col = "red", las = 1, ylab = "The probability density function")
 #' 
 #' ## The cumulative distribution and the Reliability function
-#' curve(pGPW(x,alpha=0.5,theta=0.5,lambda=0.25), from=0, to=2.5, col="red", las=1, ylab="The Reliability function")
+#' par(mfrow = c(1, 2))
+#' curve(pGPW(x, alpha = 0.5, theta = 0.5, lambda = 0.25), from = 0, to = 2.5, col = "red", las = 1, ylab = "The cumulative distribution function")
+#' curve(pGPW(x, alpha = 0.5, theta = 0.5, lambda = 0.25, lower.tail = FALSE), from = 0, to = 2.5, col = "red", las = 1, ylab = "The Reliability function")
 #' 
 #' ## The quantile function
-#' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qGPW(p,alpha=0.5,theta=0.5,lambda=0.25), y=p, xlab="Quantile", las=1, ylab="Probability")
+#' p <- seq(from = 0, to = 0.99999, length.out = 100)
+#' plot(x = qGPW(p, alpha = 0.5, theta = 0.5, lambda = 0.25), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+#' curve(pGPW(x, alpha = 0.5, theta = 0.5, lambda = 0.25), from = 0, add = TRUE, col = "red")
 #' 
 #' ## The random function
-#' hist(rGPW(10000,alpha=0.5,theta=0.5,lambda=0.25),freq=F,xlab="x", las=1, main="")
-#' curve(dGPW(x,alpha=0.5,theta=0.5,lambda=0.25),  from=0, add=T)
+#' hist(rGPW(n = 10000, alpha = 0.5, theta = 0.5, lambda = 0.25), freq = FALSE, xlab = "x", las = 1, main = "")
+#' curve(dGPW(x, alpha = 0.5, theta = 0.5, lambda = 0.25),  from = 0, add = TRUE, col = "red")
 #' 
 #' ## The Hazard function
-#' curve(hGPW(x,alpha=1,theta=2,lambda=1.25), from=0, to=3.2, ylim=c(0,6), col="red", las=1, ylab="The Hazard function")
-
+#' curve(hGPW(x, alpha = 0.5, theta = 0.5, lambda = 0.25), from = 0, to = 6, ylim = c(0, 13), col = "red", las = 1, ylab = "The Hazard function")
 
 dGPW<-function(x,alpha,theta,lambda,log = FALSE){
   if (any(x<0)) 

@@ -4,16 +4,16 @@
 #' The Modified Weibull Distribution
 #' 
 #' @description 
-#' Density, distribution function, quantile function and
-#' random generation for the modified weibull distribution with
+#' Density, distribution function, quantile function, 
+#' random generation and hazard function for the modified weibull distribution with
 #' parameters \code{beta}, \code{gamma} and \code{lambda}.
 #' 
 #' @param x,q	vector of quantiles.
 #' @param p vector of probabilities.
 #' @param n number of observations. 
-#' @param beta shape parameter.    
-#' @param gamma parameter.
-#' @param lambda scale parameter.        
+#' @param beta shape parameter one.    
+#' @param gamma parameter two.
+#' @param lambda scale parameter three.        
 #' @param log,log.p	logical; if TRUE, probabilities p are given as log(p).	
 #' @param lower.tail logical; if TRUE (default), probabilities are 
 #' P[X <= x], otherwise, P[X > x].
@@ -29,26 +29,29 @@
 #' @return 
 #' \code{dMW} gives the density, \code{pMW} gives the distribution 
 #' function, \code{qMW} gives the quantile function, \code{rMW}
-#' generates random deviatesand and \code{hMW} gives the hazard function.
+#' generates random deviates and \code{hMW} gives the hazard function.
 #' 
 #' @export
 #' @examples  
 #' ## The probability density function 
-#' curve(dMW(x,2,1.5,0.2), from=0, to=2, ylim=c(0,2.2), col="red", las=1, ylab="The probability density function")
+#' curve(dMW(x, beta = 2, gamma = 1.5, lambda = 0.2), from=0, to=2, ylim=c(0,1.5), col="red", las=1, ylab="The probability density function")
 #' 
 #' ## The cumulative distribution and the Reliability function
-#' curve(pMW(x, beta=2,gamma=1.5,lambda=0.2), from=0, to=2, col="red", las=1, ylab="The Reliability function")
+#' par(mfrow = c(1, 2))
+#' curve(pMW(x, beta = 2, gamma = 1.5, lambda = 0.2), from = 0, to = 2, ylim = c(0, 1), col = "red", las = 1, ylab = "The cumulative distribution function")
+#' curve(pMW(x, beta = 2, gamma = 1.5, lambda = 0.2, lower.tail = FALSE), from = 0, to = 2, ylim = c(0, 1), col = "red", las = 1, ylab = "The Reliability function")
 #' 
 #' ## The quantile function
-#' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qMW(p=p,beta=2,gamma=1.5,lambda=0.2), y=p, xlab="Quantile", las=1, ylab="Probability")
+#' p <- seq(from = 0, to = 0.998, length.out = 100)
+#' plot(x = qMW(p = p, beta = 2, gamma = 1.5, lambda = 0.2), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+#' curve(pMW(x, beta = 2, gamma = 1.5, lambda = 0.2), from = 0, add = TRUE, col = "red")
 #' 
 #' ## The random function
-#' hist(rMW(1000,beta=2,gamma=1.5,lambda=0.2),freq=F,xlab="x", las=1, main="")
-#' curve(dMW(x,beta=2,gamma=1.5,lambda=0.2),  from=0, add=T)
+#' hist(rMW(n = 1000, beta = 2, gamma = 1.5, lambda = 0.2), freq = FALSE, , ylim=c(0,1.5),xlab = "x", las = 1, main = "")
+#' curve(dMW(x, beta = 2, gamma = 1.5, lambda = 0.2), from = 0, , ylim=c(0,1.5), add = T, col = "red")
 #' 
 #' ## The Hazard function
-#' curve(hMW(x,beta=2,gamma=1.5,lambda=0.2), from=0, to=1.5, ylim=c(0,5), col="red", las=1, ylab="The Hazard function")
+#' curve(hMW(x, beta = 2, gamma = 1.5, lambda = 0.2), from = 0, to = 1.5, ylim = c(0, 5), col = "red", las = 1, ylab = "The Hazard function")
 
 
 dMW<-function(x,beta,gamma,lambda, log = FALSE){

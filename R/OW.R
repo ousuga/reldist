@@ -4,16 +4,16 @@
 #' The Odd Weibull Distribution
 #' 
 #' @description 
-#' Density, distribution function, quantile function and
-#' random generation for the odd weibull distribution with
+#' Density, distribution function, quantile function, 
+#' random generation and hazard function for the odd weibull distribution with
 #' parameters \code{alpha}, \code{theta} and \code{lambda}.
 #' 
 #' @param x,q	vector of quantiles.
 #' @param p vector of probabilities.
 #' @param n number of observations. 
-#' @param alpha parameter.    
-#' @param theta parameter.
-#' @param lambda parameter.        
+#' @param alpha parameter one.    
+#' @param theta parameter two.
+#' @param lambda parameter three.        
 #' @param log,log.p	logical; if TRUE, probabilities p are given as log(p).	
 #' @param lower.tail logical; if TRUE (default), probabilities are 
 #' P[X <= x], otherwise, P[X > x].
@@ -22,33 +22,36 @@
 #' The generalized power weibull with parameters \code{alpha}, \code{theta}
 #' and \code{lambda} has density given by
 #' 
-#' f(x) = alpha*theta*lambda*x^(theta-1)*exp(alpha*(x^theta))*(exp(alpha*(x^theta))*-1)^(lambda-1)*(1+(exp(alpha*(x^theta))-1)^lambda)^-2
-#' ### revisar
+#' f(x) = alpha*theta*lambda*x^(theta-1)*exp(alpha*(x^theta))*(exp(alpha*(x^theta))-1)^(lambda-1)*(1+(exp(alpha*(x^theta))-1)^lambda)^-2
+#'
 #' for x > 0.
 #' 
 #' @return 
 #' \code{dOW} gives the density, \code{pOW} gives the distribution 
 #' function, \code{qOW} gives the quantile function, \code{rOW}
-#' generates random deviatesand and \code{hOW} gives the hazard function.
+#' generates random deviates and \code{hOW} gives the hazard function.
 #' 
 #' @export
 #' @examples  
 #' ## The probability density function 
-#' curve(dOW(x,2,3,0.2), from=0, to=4, ylim=c(0,2), col="red", las=1, ylab="The probability density function")
+#' curve(dOW(x, alpha = 2, theta = 3, lambda = 0.2), from = 0, to = 4, ylim = c(0, 2), col = "red", las = 1, ylab = "The probability density function")
 #' 
 #' ## The cumulative distribution and the Reliability function
-#' curve(pOW(x, alpha=2,theta=3,lambda=0.2), from=0, to=4, col="red", las=1, ylab="The Reliability function")
+#' par(mfrow = c(1, 2))
+#' curve(pOW(x, alpha = 2, theta = 3, lambda = 0.2), from = 0, to = 4, ylim = c(0, 1), col = "red", las = 1, ylab = "The cumulative distribution function")
+#' curve(pOW(x, alpha = 2, theta = 3, lambda = 0.2, lower.tail = FALSE), from = 0, to = 4,  ylim = c(0, 1), col = "red", las = 1, ylab = "The Reliability function")
 #' 
 #' ## The quantile function
-#' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qOW(p,alpha=2,theta=3,lambda=0.2), y=p, xlab="Quantile", las=1, ylab="Probability")
+#' p <- seq(from = 0, to = 0.998, length.out = 100)
+#' plot(x = qOW(p, alpha = 2, theta = 3, lambda = 0.2), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+#' curve(pOW(x, alpha = 2, theta = 3, lambda = 0.2), from = 0, add = TRUE, col = "red")
 #' 
 #' ## The random function
-#' hist(rOW(10000,alpha=2,theta=3,lambda=0.2),freq=F,xlab="x", las=1, main="")
-#' curve(dOW(x,alpha=2,theta=3,lambda=0.2),  from=0, add=T)
+#' hist(rOW(n = 10000, alpha = 2, theta = 3, lambda = 0.2), freq = FALSE, ylim = c(0, 2),xlab = "x", las = 1, main = "")
+#' curve(dOW(x, alpha = 2, theta = 3, lambda = 0.2),  from = 0, ylim = c(0, 2), add = T, col = "red")
 #' 
 #' ## The Hazard function
-#' curve(hOW(x,alpha=5,theta=3,lambda=0.7), from=0, to=2.5, ylim=c(0,3), col="red",ylab="The hazard function", las=1)
+#' curve(hOW(x, alpha = 2, theta = 3, lambda = 0.2), from = 0, to = 2.5, ylim = c(0, 3), col = "red", ylab = "The hazard function", las = 1)
 
 
 dOW<-function(x,alpha,theta,lambda, log = FALSE){

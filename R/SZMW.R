@@ -4,16 +4,16 @@
 #' The Sarhan and Zaindins Modified Weibull Distribution
 #' 
 #' @description 
-#' Density, distribution function, quantile function and
-#' random generation for Sarhan and Zaindins modified weibull distribution with
+#' Density, distribution function, quantile function, 
+#' random generation and hazard function for Sarhan and Zaindins modified weibull distribution with
 #' parameters \code{alpha}, \code{beta} and \code{gamma}.
 #' 
 #' @param x,q	vector of quantiles.
 #' @param p vector of probabilities.
 #' @param n number of observations. 
-#' @param alpha parameter.    
-#' @param beta parameter.
-#' @param gamma parameter.
+#' @param alpha parameter one.    
+#' @param beta parameter two.
+#' @param gamma parameter three.
 #' @param log,log.p	logical; if TRUE, probabilities p are given as log(p).	
 #' @param lower.tail logical; if TRUE (default), probabilities are 
 #' P[X <= x], otherwise, P[X > x].
@@ -29,27 +29,30 @@
 #' @return 
 #' \code{dSZMW} gives the density, \code{pSZMW} gives the distribution 
 #' function, \code{qSZMW} gives the quantile function, \code{rSZMW}
-#' generates random deviatesand and \code{hSZMW} gives the hazard function.
+#' generates random deviates and \code{hSZMW} gives the hazard function.
 #'  
 #' @export
 #' @examples 
 #' 
 #' ## The probability density function
-#' curve(dSZMW(x,alpha=2,beta=1.5,gamma=0.2), from=0, to=2, ylim=c(0,1.7), col="red", las=1, ylab="The probability density function")
+#' curve(dSZMW(x, alpha = 2, beta = 1.5, gamma = 0.2), from = 0, to = 2, ylim = c(0, 1.7), col = "red", las = 1, ylab = "The probability density function")
 #' 
 #' ## The cumulative distribution and the Reliability function
-#' curve(pSZMW(x,alpha=2,beta=1.5,gamma=0.2), from=0, to=2, col="red", las=1, ylab="The Reliability function")
+#' par(mfrow = c(1, 2))
+#' curve(pSZMW(x, alpha = 2, beta = 1.5, gamma = 0.2), from = 0, to = 2, ylim = c(0, 1), col = "red", las = 1, ylab = "The cumulative distribution function")
+#' curve(pSZMW(x, alpha = 2, beta = 1.5, gamma = 0.2, lower.tail = FALSE), from = 0, to = 2, ylim = c(0, 1), col = "red", las = 1, ylab = "The Reliability function")
 #' 
 #' ## The quantile function
-#' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qSZMW(p=p,alpha=1.5,beta=3,gamma=9), y=p, xlab="Quantile", las=1, ylab="Probability")
+#' p <- seq(from = 0, to = 0.99999, length.out = 100)
+#' plot(x = qSZMW(p = p, alpha = 2, beta = 1.5, gamma = 0.2), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+#' curve(pSZMW(x, alpha = 2, beta = 1.5, gamma = 0.2), from = 0, add = TRUE, col = "red")
 #' 
 #' ## The random function
-#' hist(rSZMW(1000,alpha=1.5,beta=3,gamma=9),freq=F,xlab="x", las=1, main="")
-#' curve(dSZMW(x,alpha=1.5,beta=3,gamma=9),  from=0, add=T)
+#' hist(rSZMW(n = 1000, alpha = 2, beta = 1.5, gamma = 0.2), freq = FALSE, xlab = "x", las = 1, main = "")
+#' curve(dSZMW(x, alpha = 2, beta = 1.5, gamma = 0.2),  from = 0, add = TRUE, col = "red")
 #' 
 #' ## The Hazard function
-#' curve(hSZMW(x,alpha=1,beta=1.3,gamma=2), from=0, to=3, ylim=c(0,8), col="red",ylab="The hazard function", las=1)
+#' curve(hSZMW(x, alpha = 2, beta = 1.5, gamma = 0.2), from = 0, to = 3, ylim = c(0, 8), col = "red", ylab = "The hazard function", las = 1)
 #' 
 dSZMW<-function(x,alpha,beta,gamma, log = FALSE){
   if (any(x<0)) 

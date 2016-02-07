@@ -1,21 +1,21 @@
 #' @name NMW
 #' 
 #' @title 
-#' The Almaki and Yuans modified Weibull distribution
+#' The Almaki and Yuan's modified Weibull distribution
 #' 
 #' @description 
-#' Density, distribution function, quantile function and
-#' random generation for the Almaki and Yuans modified weibull distribution with
+#' Density, distribution function, quantile function, 
+#' random generation and hazard function for the Almaki and Yuan's modified weibull distribution with
 #' parameters \code{alpha}, \code{beta}, \code{theta}, \code{gamma} and \code{lambda}.
 #' 
 #' @param x,q	vector of quantiles.
 #' @param p vector of probabilities.
 #' @param n number of observations. 
-#' @param alpha parameter.    
-#' @param beta parameter.
-#' @param theta parameter.
-#' @param gamma parameter.
-#' @param lambda parameter.
+#' @param alpha parameter one.    
+#' @param beta parameter two.
+#' @param theta parameter three.
+#' @param gamma parameter four.
+#' @param lambda parameter five.
 #' @param log,log.p	logical; if TRUE, probabilities p are given as log(p).	
 #' @param lower.tail logical; if TRUE (default), probabilities are 
 #' P[X <= x], otherwise, P[X > x].
@@ -31,26 +31,29 @@
 #' @return 
 #' \code{dNMW} gives the density, \code{pNMW} gives the distribution 
 #' function, \code{qNMW} gives the quantile function, \code{rNMW}
-#' generates random deviatesand and \code{hNMW} gives the hazard function.
+#' generates random deviates and \code{hNMW} gives the hazard function.
 #' 
 #' @export
 #' @examples 
 #' ## The probability density function 
-#' curve(dNMW(x,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2), from=0, to=1.4, ylim=c(0,3), col="red", las=1, ylab="The probability density function")
+#' curve(dNMW(x, alpha = 1.15, beta = 0.15, theta = 0.75, gamma = 5, lambda = 2), from = 0, to = 1.4, ylim = c(0, 3), col = "red", las = 1, ylab = "The probability density function")
 #' 
 #' ## The cumulative distribution and the Reliability function
-#' curve(pNMW(x,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2), from=0, to=1.4, col="red", las=1, ylab="The Reliability function")
+#' par(mfrow = c(1, 2))
+#' curve(pNMW(x, alpha = 1.15, beta = 0.15, theta = 0.75, gamma = 5, lambda = 2), from = 0, to = 1.4, col = "red", las = 1, ylab = "The cumulative distribution function")
+#' curve(pNMW(x, alpha = 1.15, beta = 0.15, theta = 0.75, gamma = 5, lambda = 2, lower.tail = FALSE), from = 0, to = 1.4, col = "red", las = 1, ylab = "The Reliability function")
 #' 
 #' ## The quantile function
-#' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qNMW(p,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2), y=p, xlab="Quantile", las=1, ylab="Probability")
+#' p <- seq(from = 0, to = 0.998, length.out = 100)
+#' plot(x=qNMW(p, alpha = 1.15, beta = 0.15, theta = 0.75, gamma = 5, lambda = 2), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+#' curve(pNMW(x, alpha = 1.15, beta = 0.15, theta = 0.75, gamma = 5, lambda = 2), from = 0, add = TRUE, col = "red")
 #' 
 #' ## The random function
-#' hhist(rNMW(1000,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2),freq=F,xlab="x", las=1, main="")
-#' curve(dNMW(x,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2),  from=0, add=T)
+#' hist(rNMW(n = 1000, alpha = 1.15, beta = 0.15, theta = 0.75, gamma = 5, lambda = 2), freq = FALSE, ylim = c(0, 3), xlab = "x", las = 1, main = "")
+#' curve(dNMW(x, alpha = 1.15, beta = 0.15, theta = 0.75, gamma = 5, lambda = 2),  from = 0, ylim = c(0, 3), add = T, col = "red")
 #' 
 #' ## The Hazard function
-#' curve(hNMW(x,alpha=1.2,beta=1.5,theta=3,gamma=0.5,lambda=0.75), from=0, to=1.5, ylim=c(0,8), col="red",ylab="The hazard function", las=1)
+#' curve(hNMW(x, alpha = 1.15, beta = 0.15, theta = 0.75, gamma = 5, lambda = 2), from = 0, to = 1.5, ylim = c(0, 8), col = "red", ylab = "The hazard function", las = 1)
 #' 
 dNMW<-function(x,alpha,beta,theta,gamma,lambda, log = FALSE){
   if (any(x<0)) 

@@ -4,8 +4,8 @@
 #' The Log-Weibull Distribution
 #' 
 #' @description 
-#' Density, distribution function, quantile function and
-#' random generation for the log-weibull distribution with
+#' Density, distribution function, quantile function, 
+#' random generation and hazard function for the log-weibull distribution with
 #' parameters \code{a} and \code{b}.
 #' 
 #' @param x,q	vector of quantiles.
@@ -28,26 +28,29 @@
 #' @return 
 #' \code{dLW} gives the density, \code{pLW} gives the distribution 
 #' function, \code{qLW} gives the quantile function, \code{rLW}
-#' generates random deviatesand and \code{hLW} gives the hazard function.
+#' generates random deviates and \code{hLW} gives the hazard function.
 #' 
 #' @export
 #' @examples  
 #' ## The probability density function 
-#' curve(dLW(x,a = 0,b = 1), from = -20, to = 10, ylim=c(0,0.4), col="red", las=1, ylab="The probability density function")
+#' curve(dLW(x, a = 0, b = 1), from = -20, to = 10, ylim = c(0, 0.4), col = "red", las = 1, ylab = "The probability density function")
 #' 
 #' ## The cumulative distribution and the Reliability function
-#' curve(pLW(x,a=0,b=1), from=0, to=10, col="red", las=1, ylab="The Reliability function")
+#' par(mfrow = c(1, 2))
+#' curve(pLW(x, a = 0, b = 1), from = 0, to = 10, ylim = c(0, 1), col = "red", las = 1, ylab = "The cumulative distribution function")
+#' curve(pLW(x, a = 0, b = 1, lower.tail = FALSE), from = 0, to = 10, ylim = c(0, 1), col = "red", las = 1, ylab = "The Reliability function")
 #' 
 #' ## The quantile function
-#' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qLW(p,a=0,b=3), y=p, xlab="Quantile", las=1, ylab="Probability")
+#' p <- seq(from = 0, to = 0.998, length.out = 100)
+#' plot(x=qLW(p, a = 0, b = 1), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+#' curve(pLW(x, a = 0, b = 1), from = -6, add = TRUE, col = "red")
 #' 
 #' ## The random function
-#' hist(rLW(10000,a=0,b=3),freq=F,xlab="x", las=1, main="")
-#' curve(dLW(x,a=0,b=3),  from=-20, to=10, add=T) 
+#' hist(rLW(10000, a = 0, b = 1), freq = FALSE,  ylim = c(0, 0.4), xlab = "x", las = 1, main = "")
+#' curve(dLW(x, a = 0, b = 1),  from = -20, to = 10,  ylim = c(0, 0.4), add = TRUE, col = "red") 
 #' 
 #' ## The Hazard function
-#' curve(hLW(x,a=0,b=1), from=-20, to=0, ylim=c(0,0.3), col="red",ylab="The hazard function", las=1)
+#' curve(hLW(x, a = 0, b = 1), from = -20, to = 0, ylim = c(0, 0.3), col = "red", ylab = "The hazard function", las = 1)
 #' 
 dLW<-function(x,a,b, log = FALSE){
   if (any(b<=0)) 

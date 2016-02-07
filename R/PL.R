@@ -4,8 +4,8 @@
 #' The Power Lindley Distribution
 #' 
 #' @description 
-#' Density, distribution function, quantile function and
-#' random generation for the power Lindley distribution with
+#' Density, distribution function, quantile function, 
+#' random generation and hazard function for the power Lindley distribution with
 #' parameters \code{alpha} and \code{beta}.
 #' 
 #' @param x,q	vector of quantiles.
@@ -28,26 +28,29 @@
 #' @return 
 #' \code{dPL} gives the density, \code{pPL} gives the distribution 
 #' function, \code{qPL} gives the quantile function, \code{rPL}
-#' generates random deviatesand and \code{hPL} gives the hazard function.
+#' generates random deviates and \code{hPL} gives the hazard function.
 #' 
 #' @export
 #' @examples  
 #' ## The probability density function 
-#' curve(dPL(x,1,0.5), from=0, to=15, ylim=c(0,0.6), col="red", las=1, ylab="The probability density function")
+#' curve(dPL(x, alpha = 1, beta = 0.5), from = 0, to = 15, ylim = c(0, 0.25), col = "red", las = 1, ylab = "The probability density function")
 #' 
 #' ## The cumulative distribution and the Reliability function
-#' curve(pPL(x,alpha=1,beta=0.5), from=0, to=15,  ylim=c(0,1), col="red", las=1, ylab="The Reliability function")
+#' par(mfrow = c(1, 2))
+#' curve(pPL(x, alpha = 1, beta = 0.5), from = 0, to = 15,  ylim = c(0, 1), col = "red", las = 1, ylab = "The cumulative distribution function")
+#' curve(pPL(x, alpha = 1, beta = 0.5, lower.tail = FALSE), from = 0, to = 15,  ylim = c(0, 1), col = "red", las = 1, ylab = "The Reliability function")
 #' 
 #' ## The quantile function
-#' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qPL(p=p,alpha=0.8,beta=0.3), y=p, xlab="Quantile", las=1, ylab="Probability")
+#' p <- seq(from = 0, to = 0.998, length.out = 100)
+#' plot(x=qPL(p=p, alpha = 1, beta = 0.5), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+#' curve(pPL(x, alpha = 1, beta = 0.5), from = 0, add = TRUE, col = "red")
 #' 
 #' ## The random function
-#' hist(rPL(1000,alpha=2,beta=0.5),freq=F,xlab="x", las=1, main="")
-#' curve(dPL(x,alpha=2,beta=0.5),  from=0, add=T, col="red")
+#' hist(rPL(n = 1000, alpha = 1, beta = 0.5), freq = FALSE, , ylim = c(0, 0.25), xlab = "x", las = 1, main = "")
+#' curve(dPL(x, alpha = 1, beta = 0.5),  from = 0, add = T, col = "red", ylim = c(0, 0.25))
 #' 
 #' ## The Hazard function
-#' curve(hPL(x,alpha=0.2,beta=1), from=0, to=10, ylim=c(0,1.5), col="red", las=1, ylab="The Hazard function")
+#' curve(hPL(x, alpha = 1, beta = 0.5), from = 0, to = 10, ylim = c(0, 0.5), col = "red", las = 1, ylab = "The Hazard function")
 
 
 dPL<-function(x,alpha,beta, log = FALSE){
