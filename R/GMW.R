@@ -67,9 +67,15 @@ dGMW<-function(y,beta,theta,gamma,lambda, log = FALSE){
     stop(paste("lambda must be positive", "\n", ""))
   
   log_fy<-log(beta*theta) + (gamma-1)*log(y) + log(gamma +lambda*y) +
+<<<<<<< HEAD
     lambda*y - beta*(y^gamma)*exp(lambda*y)  +
     (theta-1)*log(1-exp(-beta*(y^gamma)*exp(lambda*y) ))
   
+=======
+          lambda*y - beta*(y^gamma)*exp(lambda*y)  +
+         (theta-1)*log(1-exp(-beta*(y^gamma)*exp(lambda*y) ))
+   
+>>>>>>> 828ff1df7811bb20fe2f5902a14aa15ad3c483ed
   if (log == FALSE) 
     density<- exp(log_fy)
   else 
@@ -113,7 +119,11 @@ qGMW <- function(p, beta,theta,gamma,lambda, lower.tail = TRUE, log.p = FALSE) {
     stop(paste("gamma must be positive", "\n", ""))
   if (any(lambda<0)) 
     stop(paste("lambda must be positive", "\n", ""))
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 828ff1df7811bb20fe2f5902a14aa15ad3c483ed
   if (log.p == TRUE) 
     p <- exp(p)
   else p <- p
@@ -143,6 +153,7 @@ qGMW <- function(p, beta,theta,gamma,lambda, lower.tail = TRUE, log.p = FALSE) {
 #' @export
 #' @rdname GMW
 rGMW <- function(n,beta,theta,gamma,lambda){
+<<<<<<< HEAD
   if (any(beta<=0 )) 
     stop(paste("beta must be positive", "\n", ""))
   if (any(theta<=0)) 
@@ -151,6 +162,16 @@ rGMW <- function(n,beta,theta,gamma,lambda){
     stop(paste("gamma must be positive", "\n", ""))
   if (any(lambda<0)) 
     stop(paste("lambda must be positive", "\n", ""))
+=======
+if (any(beta<=0 )) 
+  stop(paste("beta must be positive", "\n", ""))
+if (any(theta<=0)) 
+  stop(paste("theta must be positive", "\n", ""))
+if (any(gamma<0)) 
+  stop(paste("gamma must be positive", "\n", ""))
+if (any(lambda<0)) 
+  stop(paste("lambda must be positive", "\n", ""))
+>>>>>>> 828ff1df7811bb20fe2f5902a14aa15ad3c483ed
   
   n <- ceiling(n)
   p <- runif(n)
