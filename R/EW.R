@@ -23,6 +23,8 @@
 #' 
 #' f(x)=lambda*alpha*theta*x^(theta-1)*exp(-alpha*(x^theta))*(1-exp(-alpha*(x^theta)))^(lambda-1)
 #' 
+#' for x > 0. 
+#' 
 #' #' @return 
 #' \code{dEW} gives the density, \code{pEW} gives the distribution 
 #' function, \code{qEW} gives the quantile function, \code{rEW}

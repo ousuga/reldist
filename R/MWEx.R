@@ -22,7 +22,7 @@
 #' The modified weibull extension distribution with parameters \code{alpha}, \code{beta}
 #' and \code{lambda} has density given by
 #' 
-#' f(x) = (lambda*alpha^((theta-1)/theta)*x^(theta-1)*e^(alpha*x^(theta))*exp(lambda*alpha^(-1/theta))*(1-e^(-alpha*x^theta)))
+#' f(x) = lambda*beta*((x/alpha)^(beta-1))*exp((x/alpha)^beta + lambda*alpha*(1-exp((x/alpha)^beta)))
 #' 
 #' for x > 0.
 #' 
