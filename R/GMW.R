@@ -1,20 +1,19 @@
 #' @name GMW
 #' 
 #' @title 
-#' The Generalized Modified Weibull Distribution 
+#' The Generalized modified Weibull Distribution 
 #' 
 #' @description 
-#' Density, distribution function, quantile function and
-#' random generation for the generalized modified weibull distribution with
-#' parameters \code{beta}, \code{theta}, \code{gamma} and \code{lambda}.
+#' Density, distribution function, quantile function, random generation and hazard function for the generalized 
+#' modified weibull distribution with parameters \code{beta}, \code{theta}, \code{gamma} and \code{lambda}.
 #' 
 #' @param x,q	vector of quantiles.
 #' @param p vector of probabilities.
 #' @param n number of observations. 
-#' @param beta parameter.
-#' @param theta parameter.
-#' @param gamma parameter.
-#' @param lambda parameter.
+#' @param beta parameter one.
+#' @param theta parameter two.
+#' @param gamma parameter three.
+#' @param lambda parameter four.
 #' @param log,log.p	logical; if TRUE, probabilities p are given as log(p).	
 #' @param lower.tail logical; if TRUE (default), probabilities are 
 #' P[X <= x], otherwise, P[X > x].
@@ -31,27 +30,29 @@
 #' #' @return 
 #' \code{dGMW} gives the density, \code{pGMW} gives the distribution 
 #' function, \code{qGMW} gives the quantile function, \code{rGMW}
-#' generates random deviatesand and \code{hGMW} gives the hazard function.
+#' generates random deviates and \code{hGMW} gives the hazard function.
 #' 
 #' @export
 #' @examples  
 #'## The probability density function
-#' curve(dGMW(x,beta=2,theta=0.5,gamma=2,lambda=1.5), from=0, to=0.8, ylim=c(0,6), col="red", las=1, ylab="The probability density function") 
+#' curve(dGMW(x, beta = 2, theta = 0.5, gamma = 2, lambda = 1.5), from = 0, to = 0.8, ylim = c(0, 6), col = "red", las = 1, ylab = "The probability density function") 
 #' 
 #' ## The cumulative distribution and the Reliability function
-#' curve(pGMW(x,beta=2,theta=0.5,gamma=2,lambda=1.5), from=0, to=1.2, col="red", las=1, ylab="The Reliability function")
-#' 
+#' par(mfrow = c(1, 2))
+#' curve(pGMW(x, beta = 2, theta = 0.5, gamma = 2, lambda = 1.5), from = 0, to = 1.2, col = "red", las = 1, ylab = "The cumulative distribution function")
+#' curve(pGMW(x, beta = 2, theta = 0.5, gamma = 2, lambda = 1.5, lower.tail = FALSE), from = 0, to = 1.2, col = "red", las = 1, ylab = "The Reliability function")
+
 #' ## The quantile function
-#' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qGMW(p=p,beta=2,theta=0.5,gamma=2,lambda=0.3), y=p, xlab="Quantile", las=1, ylab="Probability")
-#' curve(pGMW(x,beta=2,theta=0.5,gamma=2,lambda=0.3),  from=0, add=T)
+#' p <- seq(from = 0, to = 0.99999, length.out = 100)
+#' plot(x = qGMW(p, beta = 2, theta = 0.5, gamma = 2, lambda = 0.3), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+#' curve(pGMW(x, beta = 2, theta = 0.5, gamma = 2, lambda = 0.3),  from = 0, add = TRUE, col="red")
 #' 
 #' ## The random function
-#' hist(rGMW(1000,beta=2,theta=0.5,gamma=2,lambda=0.3),freq=F,xlab="x", main=""las=1)
-#' curve(dGMW(x,beta=2,theta=0.5,gamma=2,lambda=0.3),  from=0, add=T, col="red")
+#' hist(rGMW(n = 1000, beta = 2, theta = 0.5, gamma = 2,lambda = 0.3), freq = FALSE, xlab = "x", main ="", las = 1)
+#' curve(dGMW(x, beta = 2, theta = 0.5, gamma = 2, lambda = 0.3),  from = 0, add = TRUE, col = "red")
 #' 
 #' ## The Hazard function
-#'curve(hGMW(x,beta=2,theta=1.5,gamma=2,lambda=0.8), from=0, to=1, ylim=c(0,16), col="red",ylab="The hazard function", las=1)
+#'curve(hGMW(x, beta = 2, theta = 1.5, gamma = 2, lambda = 0.8), from = 0, to = 1, ylim = c(0, 16), col = "red", ylab = "The Hazard function", las = 1)
 #'
 
 dGMW<-function(y,beta,theta,gamma,lambda, log = FALSE){
@@ -67,15 +68,9 @@ dGMW<-function(y,beta,theta,gamma,lambda, log = FALSE){
     stop(paste("lambda must be positive", "\n", ""))
   
   log_fy<-log(beta*theta) + (gamma-1)*log(y) + log(gamma +lambda*y) +
-<<<<<<< HEAD
     lambda*y - beta*(y^gamma)*exp(lambda*y)  +
     (theta-1)*log(1-exp(-beta*(y^gamma)*exp(lambda*y) ))
   
-=======
-          lambda*y - beta*(y^gamma)*exp(lambda*y)  +
-         (theta-1)*log(1-exp(-beta*(y^gamma)*exp(lambda*y) ))
-   
->>>>>>> 828ff1df7811bb20fe2f5902a14aa15ad3c483ed
   if (log == FALSE) 
     density<- exp(log_fy)
   else 
@@ -119,11 +114,7 @@ qGMW <- function(p, beta,theta,gamma,lambda, lower.tail = TRUE, log.p = FALSE) {
     stop(paste("gamma must be positive", "\n", ""))
   if (any(lambda<0)) 
     stop(paste("lambda must be positive", "\n", ""))
-<<<<<<< HEAD
   
-=======
-
->>>>>>> 828ff1df7811bb20fe2f5902a14aa15ad3c483ed
   if (log.p == TRUE) 
     p <- exp(p)
   else p <- p
@@ -153,7 +144,6 @@ qGMW <- function(p, beta,theta,gamma,lambda, lower.tail = TRUE, log.p = FALSE) {
 #' @export
 #' @rdname GMW
 rGMW <- function(n,beta,theta,gamma,lambda){
-<<<<<<< HEAD
   if (any(beta<=0 )) 
     stop(paste("beta must be positive", "\n", ""))
   if (any(theta<=0)) 
@@ -162,16 +152,6 @@ rGMW <- function(n,beta,theta,gamma,lambda){
     stop(paste("gamma must be positive", "\n", ""))
   if (any(lambda<0)) 
     stop(paste("lambda must be positive", "\n", ""))
-=======
-if (any(beta<=0 )) 
-  stop(paste("beta must be positive", "\n", ""))
-if (any(theta<=0)) 
-  stop(paste("theta must be positive", "\n", ""))
-if (any(gamma<0)) 
-  stop(paste("gamma must be positive", "\n", ""))
-if (any(lambda<0)) 
-  stop(paste("lambda must be positive", "\n", ""))
->>>>>>> 828ff1df7811bb20fe2f5902a14aa15ad3c483ed
   
   n <- ceiling(n)
   p <- runif(n)
