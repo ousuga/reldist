@@ -32,27 +32,28 @@
 #' 
 #' @return 
 #' \code{dKMW} gives the density, \code{pKMW} gives the distribution 
-#' function, \code{qKMW} gives the quantile function, and \code{rKMW}
-#' generates random deviates.
+#' function, \code{qKMW} gives the quantile function, \code{rKMW}
+#' generates random deviatesand and \code{hKMW} gives the hazard function.
 #' 
 #' @export
 #' @examples 
-#' ## Curve 
-#' curve(dKMW(x,alpha=1,theta=0.6,lambda=2,a=2,b=1.2), from=0, to=3, ylim=c(0,2), col="red",ylab="Density")
+#' ## The probability density function  
+#' curve(dKMW(x,alpha=1,theta=0.6,lambda=2,a=2,b=1.2), from=0, to=3, ylim=c(0,2), col="red", las=1, ylab="The probability density function")
 #' 
-#' ## Curve 
-#' curve(pKMW(x,alpha=1,theta=0.6,lambda=2, a=2,b=1.2), from=0, to=3, col="red")
+#' ## The cumulative distribution and the Reliability function
+#' curve(pKMW(x,alpha=1,theta=0.6,lambda=2, a=2,b=1.2), from=0, to=3, col="red", las=1, ylab="The Reliability function")
 #' 
-#' ## Curve 
+#' ## The quantile function 
 #' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qKMW(p,alpha=1,theta=0.6,lambda=2, a=2,b=1.2), y=p)
+#' plot(x=qKMW(p,alpha=1,theta=0.6,lambda=2, a=2,b=1.2), y=p, xlab="Quantile", las=1, ylab="Probability"))
 #' 
-#' ## Curve
-#' hist(rKMW(1000,alpha=1,theta=0.6,lambda=2, a=2,b=1.2),freq=F,xlab="x", main="Histogram of rKMW")
+#' ## The random function
+#' hist(rKMW(1000,alpha=1,theta=0.6,lambda=2, a=2,b=1.2),freq=F,xlab="x", las=1, main="")
 #' curve(dKMW(x,alpha=1,theta=0.6,lambda=2, a=2,b=1.2),  from=0, add=T)
 #' 
-#' ## Curve
-#' curve(hKMW(x,alpha=8,theta=0.6,lambda=0.01,a=8,b=0.7), from=0, to=3.5, ylim=c(0,10), col="red",ylab="The hazard function")
+#' ## The Hazard function
+#' curve(hKMW(x,alpha=8,theta=0.6,lambda=0.01,a=8,b=0.7), from=0, to=3.5, ylim=c(0,10), col="red",ylab="The hazard function", las=1)
+
 dKMW<-function(x,alpha,theta,lambda,a,b, log = FALSE){
   if (any(x<0)) 
     stop(paste("x must be positive", "\n", ""))

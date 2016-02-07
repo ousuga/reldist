@@ -21,36 +21,36 @@
 #' The inverse weibull distribution with parameters \code{alpha} and
 #' \code{theta} has density given by
 #' 
-#' f(x) = alpha*theta*x^(-theta-1)*exp(-alpha*(x^-theta)),
+#' f(x) = alpha*theta*x^(-theta-1)*exp(-alpha*(x^-theta))
 #' 
 #' for x > 0.
 #' 
 #' @return 
 #' \code{dIW} gives the density, \code{pIW} gives the distribution 
 #' function, \code{qIW} gives the quantile function, \code{rIW}
-#' generates random deviates and \code{hIW} gives the hazard function.
+#' generates random deviatesand and \code{hIW} gives the hazard function.
 #' 
 #' @export
 #' @examples  
 #' ## The probability density function 
-#' curve(dIW(x, alpha = 5, theta = 2.5), from = 0, to = 10, ylim = c(0, 0.55), col = "red", las = 1, ylab = "The probability density function")
+#' curve(dIW(x,alpha=5,   theta = 2.5), from=0, to=10, ylim=c(0,0.55), col="red", las=1, ylab="The probability density function")
 #' 
 #' ## The cumulative distribution and the Reliability function
-#' par(mfrow = c(1, 2))
-#' curve(pIW(x, alpha = 5, theta = 2.5), from = 0, to = 10, ylim = c(0,1), col = "red", las = 1, ylab = "The cumulative distribution function")
-#' curve(pIW(x, alpha = 5, theta = 2.5, lower.tail = FALSE), from = 0, to = 10, ylim = c(0,1), col = "red", las = 1, ylab = "The Reliability function")
+#' par(mfrow=c(1,2))
+#' curve(pIW(x,alpha=5,theta=2.5), from=0, to=10, ylim=c(0,1), col="red", las=1, ylab="The cumulative distribution function")
+#' curve(pIW(x,alpha=5,theta=2.5, lower.tail=FALSE), from=0, to=10, ylim=c(0,1), col="red", las=1, ylab="The Reliability function")
 #' 
 #' ## The quantile function
-#' p <- seq(from = 0, to = 0.998, length.out = 100)
-#' plot(x = qIW(p, alpha = 5, theta = 2.5), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
-#' curve(pIW(x, alpha = 5, theta = 2.5),  from = 0, add = T, col = "red")
+#' p <- seq(0,0.998, length.out=100)
+#' plot(x=qIW(p,alpha=5,theta=2.5), y=p, xlab="Quantile", las=1, ylab="Probability")
+#' curve(pIW(x,alpha=5,theta=2.5),  from=0, add=T, col="red")
 #' 
 #' ## The random function
-#' hist(rIW(n = 1000, alpha = 5, theta = 2.5), freq = F, xlab = "x", las = 1, main = "")
-#' curve(dIW(x, alpha = 5, theta = 2.5),  from = 0, add = T, col = "red")
+#' hist(rIW(1000,alpha=5,theta=2.5),freq=F,xlab="x", las=1, main="")
+#' curve(dIW(x,alpha=5,theta=2.5),  from=0, add=T, col="red")
 #' 
-#' ## Tha Hazard function
-#' curve(hIW(x, alpha = 5, theta = 2.5), from = 0, to = 15, ylim = c(0, 1), col = "red", las = 1, ylab = "The Hazard function")
+#' ## The Hazard function
+#' curve(hIW(x,alpha=5,   theta=2.5), from=0, to=15, ylim=c(0,1), col="red", las=1, ylab="The Hazard function")
 
 dIW<-function(x,alpha,theta, log = FALSE){
   if (any(x<0)) 
@@ -128,7 +128,6 @@ rIW <- function(n,alpha,theta){
   r <- qIW(p, alpha,theta)
   r
 }
-
 #' @export
 #' @rdname IW
 hIW<-function(x,alpha,theta){

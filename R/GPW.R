@@ -28,27 +28,27 @@
 #' 
 #' @return 
 #' \code{dGPW} gives the density, \code{pGPW} gives the distribution 
-#' function, \code{qGPW} gives the quantile function, and \code{rGPW}
-#' generates random deviates.
+#' function, \code{qGPW} gives the quantile function, \code{rGPW}
+#' generates random deviatesand and \code{hGPW} gives the hazard function.
 #' 
 #' @export
 #' @examples  
-#' ## Curve 
-#' curve(dGPW(x,0.5,0.5,0.25), from=0, to=2.5, ylim=c(0,3), col="red",ylab="Density")
+#' ## The probability density function 
+#' curve(dGPW(x,0.5,0.5,0.25), from=0, to=2.5, ylim=c(0,3), col="red", las=1, ylab="The probability density function")
 #' 
-#' ## Curve
-#' curve(pGPW(x,alpha=0.5,theta=0.5,lambda=0.25), from=0, to=2.5,  col="red")
+#' ## The cumulative distribution and the Reliability function
+#' curve(pGPW(x,alpha=0.5,theta=0.5,lambda=0.25), from=0, to=2.5, col="red", las=1, ylab="The Reliability function")
 #' 
-#' ## Curve
+#' ## The quantile function
 #' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qGPW(p,alpha=0.5,theta=0.5,lambda=0.25), y=p)
+#' plot(x=qGPW(p,alpha=0.5,theta=0.5,lambda=0.25), y=p, xlab="Quantile", las=1, ylab="Probability")
 #' 
-#' ## Curve
-#' hist(rGPW(10000,alpha=0.5,theta=0.5,lambda=0.25),freq=F,xlab="x", main= "Histogram of rGEP")
+#' ## The random function
+#' hist(rGPW(10000,alpha=0.5,theta=0.5,lambda=0.25),freq=F,xlab="x", las=1, main="")
 #' curve(dGPW(x,alpha=0.5,theta=0.5,lambda=0.25),  from=0, add=T)
 #' 
-#' ##
-#' curve(hGPW(x,alpha=1,theta=2,lambda=1.25), from=0, to=3.2, ylim=c(0,6), col="red",ylab="The hazard function")
+#' ## The Hazard function
+#' curve(hGPW(x,alpha=1,theta=2,lambda=1.25), from=0, to=3.2, ylim=c(0,6), col="red", las=1, ylab="The Hazard function")
 
 
 dGPW<-function(x,alpha,theta,lambda,log = FALSE){

@@ -30,27 +30,27 @@
 #' 
 #' @return 
 #' \code{dNMW} gives the density, \code{pNMW} gives the distribution 
-#' function, \code{qNMW} gives the quantile function, and \code{rNMW}
-#' generates random deviates.
+#' function, \code{qNMW} gives the quantile function, \code{rNMW}
+#' generates random deviatesand and \code{hNMW} gives the hazard function.
 #' 
 #' @export
 #' @examples 
-#' ## Curve 
-#' curve(dNMW(x,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2), from=0, to=1.4, ylim=c(0,3), col="red",ylab="Density")
+#' ## The probability density function 
+#' curve(dNMW(x,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2), from=0, to=1.4, ylim=c(0,3), col="red", las=1, ylab="The probability density function")
 #' 
-#' ## Curve 
-#' curve(pNMW(x,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2), from=0, to=1.4,  col="red")
+#' ## The cumulative distribution and the Reliability function
+#' curve(pNMW(x,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2), from=0, to=1.4, col="red", las=1, ylab="The Reliability function")
 #' 
-#' ## Curve 
+#' ## The quantile function
 #' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qNMW(p,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2), y=p)
+#' plot(x=qNMW(p,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2), y=p, xlab="Quantile", las=1, ylab="Probability")
 #' 
-#' ## Curve
-#' hhist(rNMW(1000,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2),freq=F,xlab="x", main="")
+#' ## The random function
+#' hhist(rNMW(1000,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2),freq=F,xlab="x", las=1, main="")
 #' curve(dNMW(x,alpha=1.15,beta=0.15,theta=0.75,gamma=5,lambda=2),  from=0, add=T)
 #' 
-#' ## Curve
-#' curve(hNMW(x,alpha=1.2,beta=1.5,theta=3,gamma=0.5,lambda=0.75), from=0, to=1.5, ylim=c(0,8), col="red",ylab="The hazard function")
+#' ## The Hazard function
+#' curve(hNMW(x,alpha=1.2,beta=1.5,theta=3,gamma=0.5,lambda=0.75), from=0, to=1.5, ylim=c(0,8), col="red",ylab="The hazard function", las=1)
 #' 
 dNMW<-function(x,alpha,beta,theta,gamma,lambda, log = FALSE){
   if (any(x<0)) 

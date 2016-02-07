@@ -28,27 +28,27 @@
 #' 
 #' @return 
 #' \code{dOW} gives the density, \code{pOW} gives the distribution 
-#' function, \code{qOW} gives the quantile function, and \code{rOW}
-#' generates random deviates.
+#' function, \code{qOW} gives the quantile function, \code{rOW}
+#' generates random deviatesand and \code{hOW} gives the hazard function.
 #' 
 #' @export
 #' @examples  
-#' ## Curve 
-#' curve(dOW(x,2,3,0.2), from=0, to=4, ylim=c(0,2), col="blue",ylab="Density")
+#' ## The probability density function 
+#' curve(dOW(x,2,3,0.2), from=0, to=4, ylim=c(0,2), col="red", las=1, ylab="The probability density function")
 #' 
-#' ## Curve
-#' curve(pOW(x, alpha=2,theta=3,lambda=0.2), from=0, to=4, col="blue")
+#' ## The cumulative distribution and the Reliability function
+#' curve(pOW(x, alpha=2,theta=3,lambda=0.2), from=0, to=4, col="red", las=1, ylab="The Reliability function")
 #' 
-#' ## Curve
+#' ## The quantile function
 #' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qOW(p,alpha=2,theta=3,lambda=0.2), y=p)
+#' plot(x=qOW(p,alpha=2,theta=3,lambda=0.2), y=p, xlab="Quantile", las=1, ylab="Probability")
 #' 
-#' ## Curve
-#' hist(rOW(10000,alpha=2,theta=3,lambda=0.2),freq=F,xlab="x", main= "Histogram of rOW")
+#' ## The random function
+#' hist(rOW(10000,alpha=2,theta=3,lambda=0.2),freq=F,xlab="x", las=1, main="")
 #' curve(dOW(x,alpha=2,theta=3,lambda=0.2),  from=0, add=T)
 #' 
-#' ##
-#' curve(hOW(x,alpha=5,theta=3,lambda=0.7), from=0, to=2.5, ylim=c(0,3), col="red",ylab="The hazard function")
+#' ## The Hazard function
+#' curve(hOW(x,alpha=5,theta=3,lambda=0.7), from=0, to=2.5, ylim=c(0,3), col="red",ylab="The hazard function", las=1)
 
 
 dOW<-function(x,alpha,theta,lambda, log = FALSE){

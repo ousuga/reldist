@@ -22,33 +22,33 @@
 #' The modified weibull extension distribution with parameters \code{alpha}, \code{beta}
 #' and \code{lambda} has density given by
 #' 
-#' f(x) = 
+#' f(x) = (lambda*alpha^((theta-1)/theta)*x^(theta-1)*e^(alpha*x^(theta))*exp(lambda*alpha^(-1/theta))*(1-e^(-alpha*x^theta)))
 #' 
 #' for x > 0.
 #' 
 #' @return 
 #' \code{dMWEx} gives the density, \code{pMWEx} gives the distribution 
-#' function, \code{qMWEx} gives the quantile function, and \code{rMWEx}
-#' generates random deviates.
+#' function, \code{qMWEx} gives the quantile function, \code{rMWEx}
+#' generates random deviatesand and \code{hMWEx} gives the hazard function.
 #' 
 #' @export
 #' @examples  
-#' ## Curve 
-#' curve(dMWEx(x,alpha=1/0.5,beta=3,lambda=2),from=0, to=2.5, ylim=c(0,2.5), col="red", ylab="Density")
+#' ## The probability density function  
+#' curve(dMWEx(x,alpha=1/0.5,beta=3,lambda=2),from=0, to=2.5, ylim=c(0,2.5), col="red", las=1, ylab="The probability density function")
 #' 
-#' ## Curve
-#' curve(pMWEx(x,alpha=1/0.5,beta=3,lambda=2),from=0, to=2.5, col="red")
+#' ## The cumulative distribution and the Reliability function
+#' curve(pMWEx(x,alpha=1/0.5,beta=3,lambda=2),from=0, to=2.5, col="red", las=1, ylab="The Reliability function")
 #' 
-#' ## Curve
+#' ## The quantile function
 #' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qMWEx(p,alpha=1/0.7,beta=2,lambda=0.2), y=p)
+#' plot(x=qMWEx(p,alpha=1/0.7,beta=2,lambda=0.2), y=p, xlab="Quantile", las=1, ylab="Probability")
 #' 
-#' ## Curve
-#' hist(rMWEx(10000,alpha=1/0.7,beta=2,lambda=0.2),freq=F,xlab="x", main= "Histogram of rGEP")
+#' ## The random function
+#' hist(rMWEx(10000,alpha=1/0.7,beta=2,lambda=0.2),freq=F,xlab="x", las=1, main="")
 #' curve(dMWEx(x,alpha=1/0.7,beta=2,lambda=0.2),  from=0, add=T)
 #' 
-#' ##
-#' curve(hMWEx(x,alpha=2,beta=0.7,lambda=2), from=0, to=1.7, ylim=c(0,12), col="red",ylab="The hazard function")
+#' ## The Hazard function
+#' curve(hMWEx(x,alpha=2,beta=0.7,lambda=2), from=0, to=1.7, ylim=c(0,12), col="red",ylab="The hazard function", las=1)
 
 
 dMWEx<-function(x,alpha,beta,lambda, log = FALSE){

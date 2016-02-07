@@ -12,7 +12,7 @@
 #' @param p vector of probabilities.
 #' @param n number of observations. 
 #' @param beta shape parameter.    
-#' @param gamma    ############## NO DICE NADA SOBRE ESTE PARÁMETRO
+#' @param gamma parameter.
 #' @param lambda scale parameter.        
 #' @param log,log.p	logical; if TRUE, probabilities p are given as log(p).	
 #' @param lower.tail logical; if TRUE (default), probabilities are 
@@ -28,27 +28,27 @@
 #' 
 #' @return 
 #' \code{dMW} gives the density, \code{pMW} gives the distribution 
-#' function, \code{qMW} gives the quantile function, and \code{rMW}
-#' generates random deviates.
+#' function, \code{qMW} gives the quantile function, \code{rMW}
+#' generates random deviatesand and \code{hMW} gives the hazard function.
 #' 
 #' @export
 #' @examples  
-#' ## Curve 
-#' curve(dMW(x,2,1.5,0.2), from=0, to=2, ylim=c(0,2.2), col="red",ylab="Density")
+#' ## The probability density function 
+#' curve(dMW(x,2,1.5,0.2), from=0, to=2, ylim=c(0,2.2), col="red", las=1, ylab="The probability density function")
 #' 
-#' ## Curve
-#' curve(pMW(x, beta=2,gamma=1.5,lambda=0.2), from=0, to=2, col="blue")
+#' ## The cumulative distribution and the Reliability function
+#' curve(pMW(x, beta=2,gamma=1.5,lambda=0.2), from=0, to=2, col="red", las=1, ylab="The Reliability function")
 #' 
-#' ## Curve
+#' ## The quantile function
 #' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qMW(p=p,beta=2,gamma=1.5,lambda=0.2), y=p)
+#' plot(x=qMW(p=p,beta=2,gamma=1.5,lambda=0.2), y=p, xlab="Quantile", las=1, ylab="Probability")
 #' 
-#' ## Curve
-#' hist(rMW(1000,beta=2,gamma=1.5,lambda=0.2),freq=F,xlab="x", main= "Histogram of rMW")
+#' ## The random function
+#' hist(rMW(1000,beta=2,gamma=1.5,lambda=0.2),freq=F,xlab="x", las=1, main="")
 #' curve(dMW(x,beta=2,gamma=1.5,lambda=0.2),  from=0, add=T)
 #' 
-#' ##
-#' curve(hMW(x,beta=2,gamma=1.5,lambda=0.2), from=0, to=1.5, ylim=c(0,5), col="red",ylab="Density")
+#' ## The Hazard function
+#' curve(hMW(x,beta=2,gamma=1.5,lambda=0.2), from=0, to=1.5, ylim=c(0,5), col="red", las=1, ylab="The Hazard function")
 
 
 dMW<-function(x,beta,gamma,lambda, log = FALSE){

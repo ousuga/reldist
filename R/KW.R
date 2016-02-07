@@ -30,27 +30,27 @@
 #' 
 #' @return 
 #' \code{dKW} gives the density, \code{pKW} gives the distribution 
-#' function, \code{qKW} gives the quantile function, and \code{rKW}
-#' generates random deviates.
+#' function, \code{qKW} gives the quantile function, \code{rKW}
+#' generates random deviatesand and \code{hKW} gives the hazard function.
 #' 
 #' @export
 #' @examples 
-#' ## Curve 
-#' curve(dKW(x,alpha=3,beta=0.8,a=2,b=1.5), from=0, to=3, ylim=c(0,2.5), col="red",ylab="Density")
+#' ## The probability density function  
+#' curve(dKW(x,alpha=3,beta=0.8,a=2,b=1.5), from=0, to=3, ylim=c(0,2.5), col="red", las=1, ylab="The probability density function")
+#'
+#' ## The cumulative distribution and the Reliability function
+#' curve(dKW(x,alpha=3,theta=0.8,a=2,b=1.5), from=0, to=3, ylim=c(0,2.5), col="red", las=1, ylab="The Reliability function")
 #' 
-#' ## Curve 
-#' curve(dKW(x,alpha=3,theta=0.8,a=2,b=1.5), from=0, to=3, ylim=c(0,2.5), col="red",ylab="Density")
-#' 
-#' ## Curve 
+#' ## The quantile function
 #' p <- seq(0,0.99999, length.out=100)
-#' plot(x=qKW(p,alpha=3,theta=0.8,a=2,b=1.5), y=p)
+#' plot(x=qKW(p,alpha=3,theta=0.8,a=2,b=1.5), y=p, xlab="Quantile", las=1, ylab="Probability"))
 #' 
-#' ## Curve
-#' hist(rKW(10000,alpha=1.2,theta=1.5,a=2,b=1.2),freq=F,xlab="x", main= "Histogram of rKW")
+#' ## The random function
+#' hist(rKW(10000,alpha=1.2,theta=1.5,a=2,b=1.2),freq=F,xlab="x", las=1, main="")
 #' curve(dKW(x,alpha=1.2,theta=1.5,a=2,b=1.2),  from=0, add=T)
 #' 
-#' ## Curve
-#' curve(hKW(x,alpha=3,theta=0.5,a=3,b=3), from=0, to=2.1, ylim=c(0,10), col="red",ylab="The hazard function")
+#' ## The Hazard function
+#' curve(hKW(x,alpha=3,theta=0.5,a=3,b=3), from=0, to=2.1, ylim=c(0,10), col="red",ylab="The hazard function", las=1)
 
 dKW<-function(x,alpha,theta,a,b, log = FALSE){
   if (any(x<0)) 
