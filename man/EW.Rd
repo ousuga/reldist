@@ -36,11 +36,13 @@ P[X <= x], otherwise, P[X > x].}
 \item{n}{number of observations.}
 }
 \value{
-Sabes una cosa...
+\code{dEW} gives the density, \code{pEW} gives the distribution
+function, \code{qEW} gives the quantile function, \code{rEW}
+generates random deviates and \code{hEW} gives the hazard function.
 }
 \description{
-Density, distribution function, quantile function and
-random generation for the exponentiated weibull  distribution with
+Density, distribution function, quantile function,
+random generation  and hazard function for the exponentiated weibull  distribution with
 parameters \code{alpha}, \code{theta} and \code{lambda}.
 }
 \details{
@@ -48,23 +50,28 @@ The Exponentiated Weibull Distribution with parameters \code{alpha},
 \code{theta} and \code{lambda} has density given by
 
 f(x)=lambda*alpha*theta*x^(theta-1)*exp(-alpha*(x^theta))*(1-exp(-alpha*(x^theta)))^(lambda-1)
+
+#'
 }
 \examples{
-## Curve
-curve(dEW(x,2,1.5,0.5), from=0, to=2, col="red",ylab="Density")
+## The probability density function
+curve(dEW(x, alpha = 2, theta = 1.5, lambda = 0.5), from = 0, to = 2, ylim = c(0, 2.5), col = "red", las = 1, ylab = "The probability density function")
 
-## Curve
-curve(pEW(x,alpha=2,theta=1.5,lambda=0.5), from=0, to=2,  col="red")
+## The cumulative distribution and the Reliability function
+par(mfrow = c(1, 2))
+curve(pEW(x, alpha = 2, theta = 1.5, lambda = 0.5), from = 0, to = 2,  col = "red", las = 1, ylab = "The cumulative distribution function")
+curve(pEW(x, alpha = 2, theta = 1.5, lambda = 0.5, lower.tail = FALSE), from = 0, to = 2,  col = "red", las = 1, ylab = "The Reliability function")
 
-## Curve
-p <- seq(0,0.99999, length.out=100)
-plot(x=qEW(p,alpha=2,theta=1.5,lambda=0.5), y=p)
+## The quantile function
+p <- seq(from = 0, to = 0.99999, length.out = 100)
+plot(x = qEW(p, alpha = 2, theta = 1.5, lambda = 0.5), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+curve(pEW(x, alpha = 2, theta = 1.5, lambda = 0.5),  from = 0, add = TRUE, col = "red")
 
-## Curve
-hist(rEW(10000,alpha=2,theta=1.5,lambda=0.5),freq=F,xlab="x", main="")
-curve(dEW(x,alpha=2,theta=1.5,lambda=0.5),  from=0, add=T)
+## The random function
+hist(rEW(n = 10000, alpha = 2, theta = 1.5, lambda = 0.5), freq = FALSE, xlab = "x", las = 1, main = "")
+curve(dEW(x, alpha = 2, theta = 1.5, lambda = 0.5),  from = 0, add = TRUE, col = "red")
 
-##
-curve(hEW(x,alpha=2,theta=1.5,lambda=0.5), from=0, to=2, ylim=c(0,7), col="red",ylab="The hazard function")
+## The Hazard function
+curve(hEW(x, alpha = 2,theta = 1.5, lambda = 0.5), from = 0, to = 2, ylim = c(0, 7), col = "red", ylab = "The Hazard function")
 }
 

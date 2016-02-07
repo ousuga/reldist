@@ -22,13 +22,13 @@ hKMW(x, alpha, theta, lambda, a, b, log = FALSE)
 \arguments{
 \item{x,q}{vector of quantiles.}
 
-\item{alpha}{parameter.}
+\item{alpha}{parameter one.}
 
-\item{lambda}{parameter.}
+\item{lambda}{parameter three.}
 
-\item{a}{parameter.}
+\item{a}{parameter four.}
 
-\item{b}{parameter.}
+\item{b}{parameter five.}
 
 \item{log,log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
@@ -39,16 +39,16 @@ P[X <= x], otherwise, P[X > x].}
 
 \item{n}{number of observations.}
 
-\item{beta}{parameter.}
+\item{beta}{parameter two.}
 }
 \value{
 \code{dKMW} gives the density, \code{pKMW} gives the distribution
-function, \code{qKMW} gives the quantile function, and \code{rKMW}
-generates random deviates.
+function, \code{qKMW} gives the quantile function, \code{rKMW}
+generates random deviates and \code{hKMW} gives the hazard function.
 }
 \description{
-Density, distribution function, quantile function and
-random generation for the kumaraswamy modified weibull distribution with
+Density, distribution function, quantile function,
+random generation and hazard function for the kumaraswamy modified weibull distribution with
 parameters \code{alpha}, \code{theta}, \code{lambda}, \code{a} and \code{b}.
 }
 \details{
@@ -62,21 +62,24 @@ f(x)=a*b*alpha*x^(theta-1)*(theta+lambda*x)*exp(lambda*x-alpha*x^(theta)*exp(lam
 for x>0.
 }
 \examples{
-## Curve
-curve(dKMW(x,alpha=1,theta=0.6,lambda=2,a=2,b=1.2), from=0, to=3, ylim=c(0,2), col="red",ylab="Density")
+## The probability density function
+curve(dKMW(x, alpha = 1, theta = 0.6, lambda = 2, a = 2, b = 1.2), from = 0, to = 3, ylim = c(0, 2), col = "red", las = 1, ylab = "The probability density function")
 
-## Curve
-curve(pKMW(x,alpha=1,theta=0.6,lambda=2, a=2,b=1.2), from=0, to=3, col="red")
+## The cumulative distribution and the Reliability function
+par(mfrow = c(1, 2))
+curve(pKMW(x, alpha = 1, theta = 0.6, lambda = 2, a = 2, b = 1.2), from = 0, to = 3, col = "red", las = 1, ylab = "The cumulative distribution function")
+curve(pKMW(x, alpha = 1, theta = 0.6, lambda = 2, a = 2, b = 1.2, lower.tail=FALSE), from = 0, to = 3, col = "red", las = 1, ylab = "The Reliability function")
 
-## Curve
-p <- seq(0,0.99999, length.out=100)
-plot(x=qKMW(p,alpha=1,theta=0.6,lambda=2, a=2,b=1.2), y=p)
+## The quantile function
+p <- seq(from = 0, to = 0.99999, length.out = 100)
+plot(x = qKMW(p, alpha = 1, theta = 0.6, lambda = 2, a = 2, b = 1.2), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+curve(pKMW(x, alpha = 1, theta = 0.6, lambda = 2, a = 2, b = 1.2), from = 0, add = TRUE, col = "red")
 
-## Curve
-hist(rKMW(1000,alpha=1,theta=0.6,lambda=2, a=2,b=1.2),freq=F,xlab="x", main="Histogram of rKMW")
-curve(dKMW(x,alpha=1,theta=0.6,lambda=2, a=2,b=1.2),  from=0, add=T)
+## The random function
+hist(rKMW(n = 1000,alpha = 1, theta = 0.6, lambda = 2, a = 2, b = 1.2), freq = FALSE, ylim = c(0, 2), xlab = "x", las = 1, main = "")
+curve(dKMW(x, alpha = 1, theta = 0.6, lambda = 2, a = 2, b = 1.2),  from = 0, to = 3, add = TRUE, col = "red")
 
-## Curve
-curve(hKMW(x,alpha=8,theta=0.6,lambda=0.01,a=8,b=0.7), from=0, to=3.5, ylim=c(0,10), col="red",ylab="The hazard function")
+## The Hazard function
+curve(hKMW(x, alpha = 1, theta = 0.6, lambda = 2, a = 2, b = 1.2), from = 0, to = 1, ylim = c(0, 10), col = "red", ylab = "The Hazard function", las = 1)
 }
 

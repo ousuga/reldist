@@ -22,11 +22,13 @@ hKW(x, alpha, theta, a, b)
 \arguments{
 \item{x,q}{vector of quantiles.}
 
-\item{alpha}{parameter.}
+\item{alpha}{parameter one.}
 
-\item{a}{parameter.}
+\item{theta}{parameter two.}
 
-\item{b}{parameter.}
+\item{a}{parameter three.}
+
+\item{b}{parameter four.}
 
 \item{log,log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
@@ -36,21 +38,19 @@ P[X <= x], otherwise, P[X > x].}
 \item{p}{vector of probabilities.}
 
 \item{n}{number of observations.}
-
-\item{beta}{parameter.}
 }
 \value{
 \code{dKW} gives the density, \code{pKW} gives the distribution
-function, \code{qKW} gives the quantile function, and \code{rKW}
-generates random deviates.
+function, \code{qKW} gives the quantile function, \code{rKW}
+generates random deviates and \code{hKW} gives the hazard function.
 }
 \description{
-Density, distribution function, quantile function and
-random generation for the kumaraswamy weibull distribution with
-parameters \code{alpha}, \code{beta}, \code{a} and \code{b}.
+Density, distribution function, quantile function,
+random generation and hazard function for the kumaraswamy weibull distribution with
+parameters \code{alpha}, \code{theta}, \code{a} and \code{b}.
 }
 \details{
-The kumaraswamy weibull with parameters \code{alpha}, \code{beta}, \code{a} and \code{b}
+The kumaraswamy weibull with parameters \code{alpha}, \code{theta}, \code{a} and \code{b}
 has density given by
 
 f(x)=a*b*alpha*theta*x^(theta-1)*exp(-alpha*x^theta)*(1-exp(-alpha*x^theta))^(a-1)*
@@ -59,21 +59,24 @@ f(x)=a*b*alpha*theta*x^(theta-1)*exp(-alpha*x^theta)*(1-exp(-alpha*x^theta))^(a-
 for x>0.
 }
 \examples{
-## Curve
-curve(dKW(x,alpha=3,beta=0.8,a=2,b=1.5), from=0, to=3, ylim=c(0,2.5), col="red",ylab="Density")
+## The probability density function
+curve(dKW(x, alpha = 3, theta = 0.8, a = 2, b = 1.5), from = 0, to = 3, ylim = c(0, 2.5), col = "red", las = 1, ylab = "The probability density function")
 
-## Curve
-curve(dKW(x,alpha=3,theta=0.8,a=2,b=1.5), from=0, to=3, ylim=c(0,2.5), col="red",ylab="Density")
+## The cumulative distribution and the Reliability function
+par(mfrow = c(1, 2))
+curve(pKW(x, alpha = 3, theta = 0.8, a = 2, b = 1.5), from = 0, to = 3, ylim = c(0, 1), col = "red", las = 1, ylab = "The cumulative distribution function")
+curve(pKW(x, alpha = 3, theta = 0.8, a = 2, b = 1.5, lower.tail = FALSE), from = 0, to = 3, ylim = c(0, 1), col = "red", las = 1, ylab = "The Reliability function")
 
-## Curve
+## The quantile function
 p <- seq(0,0.99999, length.out=100)
-plot(x=qKW(p,alpha=3,theta=0.8,a=2,b=1.5), y=p)
+plot(x=qKW(p, alpha = 3, theta = 0.8, a = 2, b = 1.5), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+curve(pKW(x, alpha = 3, theta = 0.8, a = 2, b = 1.5), from = 0, add = TRUE, col = "red")
 
-## Curve
-hist(rKW(10000,alpha=1.2,theta=1.5,a=2,b=1.2),freq=F,xlab="x", main= "Histogram of rKW")
-curve(dKW(x,alpha=1.2,theta=1.5,a=2,b=1.2),  from=0, add=T)
+## The random function
+hist(rKW(10000, alpha = 3, theta = 0.8, a = 2, b = 1.5), freq = FALSE, xlab = "x", las = 1, ylim = c(0, 2.5), main = "")
+curve(dKW(x, alpha = 3, theta = 0.8, a = 2, b = 1.5),  from = 0, add = TRUE, col = "red" )
 
-## Curve
-curve(hKW(x,alpha=3,theta=0.5,a=3,b=3), from=0, to=2.1, ylim=c(0,10), col="red",ylab="The hazard function")
+## The Hazard function
+curve(hKW(x, alpha = 3, theta = 0.8, a = 2, b = 1.5), from = 0, to = 2.1, ylim = c(0, 4), col = "red", ylab = "The Hazard function", las = 1)
 }
 

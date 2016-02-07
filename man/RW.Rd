@@ -22,9 +22,9 @@ hRW(x, alpha, theta)
 \arguments{
 \item{x,q}{vector of quantiles.}
 
-\item{alpha}{##############BUSCAR############}
+\item{alpha}{parameter one.}
 
-\item{theta}{##############BUSCAR############}
+\item{theta}{parameter two.}
 
 \item{log,log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
@@ -37,12 +37,12 @@ P[X <= x], otherwise, P[X > x].}
 }
 \value{
 \code{dRW} gives the density, \code{pRW} gives the distribution
-function, \code{qRW} gives the quantile function, and \code{rRW}
-generates random deviates.
+function, \code{qRW} gives the quantile function, \code{rRW}
+generates random deviates and \code{hRW} gives the hazard function.
 }
 \description{
-Density, distribution function, quantile function and
-random generation for the reflected weibull distribution with
+Density, distribution function, quantile function,
+random generation and hazard function for the reflected weibull distribution with
 parameters \code{alpha} and \code{theta}.
 }
 \details{
@@ -51,24 +51,27 @@ The reflected weibull distribution with parameters \code{alpha} and
 
 f(x) = alpha*theta*(-x)^(theta-1)*exp(-alpha*(-x)^alpha)
 
-for - inf < x < 0.  ### También x < 0.
+for - inf < x < 0.
 }
 \examples{
-## Curve
-curve(dRW(x,1,1), from=-5, to=0, ylim=c(0,1), col="red",ylab="Density")
+## The probability density function
+curve(dRW(x, alpha = 1, theta = 1), from = -5, to = 0, ylim = c(0, 1), col = "red", las = 1, ylab = "The probability density function")
 
-## Curve
-curve(pRW(x,alpha=1,theta=1), from=-5, to=0, ylim=c(0,1), col="blue",ylab="Density")
+## The cumulative distribution and the Reliability function
+par(mfrow = c(1, 2))
+curve(pRW(x, alpha = 1, theta = 1), from = -5, to = 0, ylim = c(0, 1), col = "red", las = 1, ylab ="The cumulative distribution function")
+curve(pRW(x, alpha = 1, theta = 1, lower.tail = FALSE), from = -5, to = 0, ylim = c(0, 1), col = "red", las = 1, ylab = "The Reliability function")
 
-## Curve
-p <- seq(0,0.99999, length.out=100)
-plot(x=qRW(p=p,alpha=0.5,theta=2), y=p)
+## The quantile function
+p <- seq(from = 0, to = 0.99999, length.out = 100)
+plot(x=qRW(p=p,alpha = 1, theta = 1), y=p, xlab="Quantile", las=1, ylab="Probability")
+curve(pRW(x, alpha = 1, theta = 1), from = -5, add = TRUE, col = "red")
 
-## Curve
-hist(rRW(10000,alpha=0.5,theta=2), freq=F,xlab="x", main= "Histogram of rRW")
-curve(dRW(x,alpha=0.5,theta=2),  from=-5, to=0, add=T)
+## The random function
+hist(rRW(n = 10000, alpha = 1, theta = 1), freq = FALSE,xlab = "x", las = 1, main = "")
+curve(dRW(x, alpha = 1, theta = 1),  from = -5, to = 0, add = TRUE, col = "red")
 
-##
-curve(hRW(x,alpha=1,theta=1), from=-5, to=0, ylim=c(0,1), col="red",ylab="The hazard function")
+## The Hazard function
+curve(hRW(x, alpha = 1, theta = 1), from = -5, to = 0, ylim = c(0, 1), col = "red", ylab = "The hazard function", las = 1)
 }
 

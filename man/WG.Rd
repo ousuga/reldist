@@ -39,38 +39,41 @@ P[X <= x], otherwise, P[X > x].}
 }
 \value{
 \code{dWG} gives the density, \code{pWG} gives the distribution
-function, \code{qWG} gives the quantile function, and \code{rWG}
-generates random deviates.
+function, \code{qWG} gives the quantile function, \code{rWG}
+generates random deviates and \code{hWG} gives the hazard function.
 }
 \description{
-Density, distribution function, quantile function and
-random generation for the weibull geometric distribution with
+Density, distribution function, quantile function,
+random generation and hazard function for the weibull geometric distribution with
 parameters \code{alpha}, \code{beta} and \code{pi}.
 }
 \details{
 The weibull geometric distribution with parameters \code{alpha},
 \code{beta} and \code{pi} has density given by
 
-f(x) = ((alpha*beta)^alpha*(1-pi)*x^(alpha-1)*exp(-(beta*x)^alpha))/(1- pi*exp(-(beta*x)^alpha))^2
+f(x) = (alpha*(beta)^alpha*(1-pi)*x^(alpha-1)*exp(-(beta*x)^alpha))/(1- pi*exp(-(beta*x)^alpha))^2
 
 for x > 0.
 }
 \examples{
-## Curve
-curve(dWG(x,0.5,0.2, 0.95), from=0, to=5, ylim=c(0,1.5), col="red",ylab="Density")
+## The probability density function
+curve(dWG(x, alpha = 0.5, beta = 0.2, pi = 0.95), from = 0, to = 5, ylim = c(0, 1.5), col = "red", las = 1, ylab = "The probability density function")
 
-## Curve
-curve(pWG(x,0.5,0.2, 0.95), from=0, to=5, col="blue")
+## The cumulative distribution and the Reliability function
+par(mfrow = c(1, 2))
+curve(pWG(x, alpha = 0.5, beta = 0.2, pi = 0.95), from = 0, to = 5, ylim = c(0, 1), col = "red", las = 1, ylab = "The cumulative distribution function")
+curve(pWG(x, alpha = 0.5, beta = 0.2, pi = 0.95, lower.tail = FALSE), from = 0, to = 5, ylim = c(0, 1), col = "red", las = 1, ylab = "The Reliability function")
 
-## Curve
-p <- seq(0,0.99999, length.out=100)
-plot(x=qWG(p=p,alpha=0.5,beta=0.2, pi=0.95), y=p)
+## The quantile function
+p <- seq(from = 0, to = 0.99999, length.out = 100)
+plot(x = qWG(p = p, alpha = 0.5, beta = 0.2, pi = 0.95), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+curve(pWG(x, alpha = 0.5, beta = 0.2, pi = 0.95), from = 0, add = TRUE, col = "red")
 
-## Curve
-hist(rWG(1000,alpha=1.5,beta=0.2, pi=0.95),freq=F,xlab="x", main= "Histogram of rWG")
-curve(dWG(x,alpha=1.5,beta=0.2, pi=0.95),  from=0, add=T)
+## The random function
+hist(rWG(1000, alpha = 0.5, beta = 0.2, pi = 0.95), freq = FALSE, xlab = "x", ylim = c(0, 0.2), las = 1, main = "")
+curve(dWG(x, alpha = 0.5, beta = 0.2, pi = 0.95),  from = 0, add = TRUE, col = "red", ylim = c(0, 0.2))
 
-##
-curve(hWG(x,alpha=2,beta=0.25, pi=0.15), from=0, to=15, ylim=c(0,2.2), col="red",ylab="The hazard function")
+## The Hazard function
+curve(hWG(x, alpha = 0.5, beta = 0.2, pi = 0.95), from = 0, to = 15, ylim = c(0, 2.2), col = "red", ylab = "The hazard function", las = 1)
 }
 

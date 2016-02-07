@@ -37,12 +37,12 @@ P[X <= x], otherwise, P[X > x].}
 }
 \value{
 \code{dLW} gives the density, \code{pLW} gives the distribution
-function, \code{qLW} gives the quantile function, and \code{rLW}
-generates random deviates.
+function, \code{qLW} gives the quantile function, \code{rLW}
+generates random deviates and \code{hLW} gives the hazard function.
 }
 \description{
-Density, distribution function, quantile function and
-random generation for the log-weibull distribution with
+Density, distribution function, quantile function,
+random generation and hazard function for the log-weibull distribution with
 parameters \code{a} and \code{b}.
 }
 \details{
@@ -54,21 +54,24 @@ f(x)= (1/b)*exp((x-a)/b)*exp(-exp((x-a)/b))
 for -Inf < x < Inf.
 }
 \examples{
-## Curve
-curve(dLW(x,a = 0,b = 1), from = -20, to = 10, ylim=c(0,0.4), col="red", ylab="Density")
+## The probability density function
+curve(dLW(x, a = 0, b = 1), from = -20, to = 10, ylim = c(0, 0.4), col = "red", las = 1, ylab = "The probability density function")
 
-## Curve
-curve(pLW(x,a=0,b=1), from=0, to=10, col="red")
+## The cumulative distribution and the Reliability function
+par(mfrow = c(1, 2))
+curve(pLW(x, a = 0, b = 1), from = 0, to = 10, ylim = c(0, 1), col = "red", las = 1, ylab = "The cumulative distribution function")
+curve(pLW(x, a = 0, b = 1, lower.tail = FALSE), from = 0, to = 10, ylim = c(0, 1), col = "red", las = 1, ylab = "The Reliability function")
 
-## Curve
-p <- seq(0,0.99999, length.out=100)
-plot(x=qLW(p,a=0,b=3), y=p)
+## The quantile function
+p <- seq(from = 0, to = 0.998, length.out = 100)
+plot(x=qLW(p, a = 0, b = 1), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+curve(pLW(x, a = 0, b = 1), from = -6, add = TRUE, col = "red")
 
-## Curve
-hist(rLW(10000,a=0,b=3),freq=F,xlab="x", main= "")
-curve(dLW(x,a=0,b=3),  from=-20, to=10, add=T)
+## The random function
+hist(rLW(10000, a = 0, b = 1), freq = FALSE,  ylim = c(0, 0.4), xlab = "x", las = 1, main = "")
+curve(dLW(x, a = 0, b = 1),  from = -20, to = 10,  ylim = c(0, 0.4), add = TRUE, col = "red")
 
-##
-curve(hLW(x,a=0,b=1), from=-20, to=0, ylim=c(0,0.3), col="red",ylab="The hazard function")
+## The Hazard function
+curve(hLW(x, a = 0, b = 1), from = -20, to = 0, ylim = c(0, 0.3), col = "red", ylab = "The hazard function", las = 1)
 }
 

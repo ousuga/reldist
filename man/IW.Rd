@@ -22,9 +22,9 @@ hIW(x, alpha, theta)
 \arguments{
 \item{x,q}{vector of quantiles.}
 
-\item{alpha}{##############BUSCAR############}
+\item{alpha}{parameter one.}
 
-\item{theta}{##############BUSCAR############}
+\item{theta}{parameter two.}
 
 \item{log,log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
@@ -37,38 +37,41 @@ P[X <= x], otherwise, P[X > x].}
 }
 \value{
 \code{dIW} gives the density, \code{pIW} gives the distribution
-function, \code{qIW} gives the quantile function, and \code{rIW}
-generates random deviates.
+function, \code{qIW} gives the quantile function, \code{rIW}
+generates random deviates and \code{hIW} gives the hazard function.
 }
 \description{
-Density, distribution function, quantile function and
-random generation for the inverse weibull distribution with
+Density, distribution function, quantile function,
+random generation and hazard function for the inverse weibull distribution with
 parameters \code{alpha} and \code{theta}.
 }
 \details{
 The inverse weibull distribution with parameters \code{alpha} and
 \code{theta} has density given by
 
-f(x) = alpha*theta*x^(-theta-1)*exp(-alpha*(x^-theta))
+f(x) = alpha*theta*x^(-theta-1)*exp(-alpha*(x^-theta)),
 
 for x > 0.
 }
 \examples{
-## Curve
-curve(dIW(x,alpha=2,   theta=1), from=0, to=10, ylim=c(0,0.6), col="red",ylab="Density")
+## The probability density function
+curve(dIW(x, alpha = 5, theta = 2.5), from = 0, to = 10, ylim = c(0, 0.55), col = "red", las = 1, ylab = "The probability density function")
 
-## Curve
-curve(pIW(x,alpha=2,theta=1), from=0, to=10, ylim=c(0,1), col="blue",ylab="Density")
+## The cumulative distribution and the Reliability function
+par(mfrow = c(1, 2))
+curve(pIW(x, alpha = 5, theta = 2.5), from = 0, to = 10, ylim = c(0, 1), col = "red", las = 1, ylab = "The cumulative distribution function")
+curve(pIW(x, alpha = 5, theta = 2.5, lower.tail = FALSE), from = 0, to = 10, ylim = c(0, 1), col = "red", las = 1, ylab = "The Reliability function")
 
-## Curve
-p <- seq(0,0.998, length.out=100)
-plot(x=qIW(p,alpha=5,theta=2.5), y=p)
+## The quantile function
+p <- seq(from = 0, to = 0.998, length.out = 100)
+plot(x = qIW(p, alpha = 5, theta = 2.5), y = p, xlab = "Quantile", las = 1, ylab = "Probability")
+curve(pIW(x, alpha = 5, theta = 2.5),  from = 0, add = TRUE, col = "red")
 
-## Curve
-hist(rIW(10000,alpha=5,theta=2.5),freq=F,xlab="x", main= "Histogram of rIW")
-curve(dIW(x,alpha=5,theta=2.5),  from=0, add=T)
+## The random function
+hist(rIW(n = 1000, alpha = 5, theta = 2.5), freq = FALSE, xlab = "x", ylim = c(0, 0.55), las = 1, main = "")
+curve(dIW(x, alpha = 5, theta = 2.5),  from = 0, to = 10, add = TRUE, ylim = c(0, 0.55), col = "red")
 
-##
-curve(hIW(x,alpha=1,   theta=0.6), from=0, to=6, ylim=c(0,1), col="red",ylab="The hazard function")
+## The Hazard function
+curve(hIW(x, alpha = 5, theta = 2.5), from = 0, to = 15, ylim = c(0, 1), col = "red", las = 1, ylab = "The Hazard function")
 }
 
